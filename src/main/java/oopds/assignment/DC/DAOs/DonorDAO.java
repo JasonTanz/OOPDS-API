@@ -1,4 +1,4 @@
-package oopds.assignment.donor;
+package oopds.assignment.DC.DAOs;
 
 public interface DonorDAO {
     
