@@ -3,7 +3,7 @@
 ## Folder Structure
 
 ### Models
-- Entities
+- Data model class correspond to entities and tables
 
 ### Services
 - Business Logic
