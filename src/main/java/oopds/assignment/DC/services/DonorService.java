@@ -1,5 +1,3 @@
 package oopds.assignment.DC.services;
 
-public class DonorService {
-    
-}
+public class DonorService {}
