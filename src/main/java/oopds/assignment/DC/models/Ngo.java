@@ -3,39 +3,33 @@ package oopds.assignment.DC.models;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Id;
-
-// import org.springframework.data.annotation.Id;
 
 @Entity
-public class Donor {
+public class Ngo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
-    @Column
     private String name;
-
-    @Column
     private String password;
+    private int manpower;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "donor_id", referencedColumnName = "id")
-    private List<DonationMade> donationMade;
+    @OneToMany
+    @JoinColumn(name = "ngo_id", referencedColumnName = "id")
+    private List<DonationRequested> donationRequested;
 
-    public Donor() {
+    public Ngo() {
     }
 
-    public Donor(String name, String password) {
+    public Ngo(String name, String password, int manpower) {
         this.name = name;
         this.password = password;
+        this.manpower = manpower;
     }
 
     public UUID getId() {
@@ -62,12 +56,20 @@ public class Donor {
         this.password = password;
     }
 
-    public List<DonationMade> getDonationMade() {
-        return this.donationMade;
+    public int getManpower() {
+        return this.manpower;
     }
 
-    public void setDonationMade(List<DonationMade> donationMade) {
-        this.donationMade = donationMade;
+    public void setManpower(int manpower) {
+        this.manpower = manpower;
+    }
+
+    public List<DonationRequested> getDonationRequested() {
+        return this.donationRequested;
+    }
+
+    public void setDonationRequested(List<DonationRequested> donationRequested) {
+        this.donationRequested = donationRequested;
     }
 
 }
