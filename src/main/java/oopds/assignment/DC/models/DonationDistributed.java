@@ -1,7 +1,6 @@
 package oopds.assignment.DC.models;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -11,68 +10,63 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class DonationDistributed {
+	@EmbeddedId
+	private DonationDistributedId id;
 
-    @EmbeddedId
-    private DonationDistributedId id;
+	@Column
+	private int quantity;
 
-    @Column
-    private int quantity;
+	public DonationDistributed() {}
 
-    public DonationDistributed() {
-    }
+	public DonationDistributed(DonationDistributedId id, int quantity) {
+		this.id = id;
+		this.quantity = quantity;
+	}
 
-    public DonationDistributed(DonationDistributedId id, int quantity) {
-        this.id = id;
-        this.quantity = quantity;
-    }
+	public DonationDistributedId getId() {
+		return this.id;
+	}
 
-    public DonationDistributedId getId() {
-        return this.id;
-    }
+	public void setId(DonationDistributedId id) {
+		this.id = id;
+	}
 
-    public void setId(DonationDistributedId id) {
-        this.id = id;
-    }
+	public int getQuantity() {
+		return this.quantity;
+	}
 
-    public int getQuantity() {
-        return this.quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }
 
 @Embeddable
 class DonationDistributedId implements Serializable {
-    // @Column(name = "donationMade_id")
-    @ManyToOne
-    @JoinColumn(name = "donationMade_id", referencedColumnName = "id")
-    private DonationMade donationMade;
+	// @Column(name = "donationMade_id")
+	@ManyToOne
+	@JoinColumn(name = "donationMade_id", referencedColumnName = "id")
+	private DonationMade donationMade;
 
-    // @Column(name = "donationRequested_id")
-    @ManyToOne
-    @JoinColumn(name = "donationRequested_id", referencedColumnName = "id")
-    private DonationRequested donationRequested;
+	// @Column(name = "donationRequested_id")
+	@ManyToOne
+	@JoinColumn(name = "donationRequested_id", referencedColumnName = "id")
+	private DonationRequested donationRequested;
 
-    public DonationDistributedId() {
-    }
+	public DonationDistributedId() {}
 
-    public DonationMade getDonationMade() {
-        return this.donationMade;
-    }
+	public DonationMade getDonationMade() {
+		return this.donationMade;
+	}
 
-    public void setDonationMade(DonationMade donationMade) {
-        this.donationMade = donationMade;
-    }
+	public void setDonationMade(DonationMade donationMade) {
+		this.donationMade = donationMade;
+	}
 
-    public DonationRequested getDonationRequested_id() {
-        return this.donationRequested;
-    }
+	public DonationRequested getDonationRequested_id() {
+		return this.donationRequested;
+	}
 
-    public void setDonationRequested_id(DonationRequested donationRequested) {
-        this.donationRequested = donationRequested;
-    }
-
+	public void setDonationRequested_id(DonationRequested donationRequested) {
+		this.donationRequested = donationRequested;
+	}
 }

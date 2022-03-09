@@ -1,5 +1,6 @@
 package oopds.assignment.DC.DAOs;
 
-public interface DonorDAO {
-    
-}
+import java.util.List;
+import oopds.assignment.DC.models.Ngo;
+
+public interface DonorDAO {}

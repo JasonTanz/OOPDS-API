@@ -2,7 +2,6 @@ package oopds.assignment.DC.models;
 
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,64 +11,63 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Ngo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
-    private String name;
-    private String password;
-    private int manpower;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private UUID id;
 
-    @OneToMany
-    @JoinColumn(name = "ngo_id", referencedColumnName = "id")
-    private List<DonationRequested> donationRequested;
+	private String name;
+	private String password;
+	private int manpower;
 
-    public Ngo() {
-    }
+	@OneToMany
+	@JoinColumn(name = "ngo_id", referencedColumnName = "id")
+	private List<DonationRequested> donationRequested;
 
-    public Ngo(String name, String password, int manpower) {
-        this.name = name;
-        this.password = password;
-        this.manpower = manpower;
-    }
+	public Ngo() {}
 
-    public UUID getId() {
-        return this.id;
-    }
+	public Ngo(String name, String password, int manpower) {
+		this.name = name;
+		this.password = password;
+		this.manpower = manpower;
+	}
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
+	public UUID getId() {
+		return this.id;
+	}
 
-    public String getName() {
-        return this.name;
-    }
+	public void setId(UUID id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public String getPassword() {
-        return this.password;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return this.password;
+	}
 
-    public int getManpower() {
-        return this.manpower;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setManpower(int manpower) {
-        this.manpower = manpower;
-    }
+	public int getManpower() {
+		return this.manpower;
+	}
 
-    public List<DonationRequested> getDonationRequested() {
-        return this.donationRequested;
-    }
+	public void setManpower(int manpower) {
+		this.manpower = manpower;
+	}
 
-    public void setDonationRequested(List<DonationRequested> donationRequested) {
-        this.donationRequested = donationRequested;
-    }
+	public List<DonationRequested> getDonationRequested() {
+		return this.donationRequested;
+	}
 
+	public void setDonationRequested(List<DonationRequested> donationRequested) {
+		this.donationRequested = donationRequested;
+	}
 }

@@ -5,11 +5,9 @@ import javax.persistence.Entity;
 @Entity
 public class DonationRequested extends Donation {
 
-    public DonationRequested() {
-    }
+	public DonationRequested() {}
 
-    public DonationRequested(String item, int quantity, int remaining) {
-        super(item, quantity, remaining);
-    }
-
+	public DonationRequested(String item, int quantity, int remaining) {
+		super(item, quantity, remaining);
+	}
 }
