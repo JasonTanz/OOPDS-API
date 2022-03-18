@@ -68,6 +68,14 @@ public class Ngo {
 		this.manpower = manpower;
 	}
 
+	public String getEmail(){
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public List<DonationRequested> getDonationRequested() {
 		return this.donationRequested;
 	}

@@ -63,6 +63,14 @@ public class Donor {
 		this.password = password;
 	}
 
+	public String getEmail() {
+		return this.email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public List<DonationMade> getDonationMade() {
 		return this.donationMade;
 	}
