@@ -2,8 +2,10 @@ package oopds.assignment.DC.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import oopds.assignment.DC.DAOs.NgoDAO;
+import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.Ngo;
 import oopds.assignment.DC.services.NgoService;
 import org.springframework.http.HttpStatus;
@@ -22,36 +24,54 @@ public class NgoController {
 	NgoDAO ngoDAO;
 
 	@GetMapping("/ngo")
-	public ResponseEntity<List<Ngo>> getAllNgos() {
+	public ResponseEntity< DataResponse<List<Ngo>> > getAllNgos() {
 		try {
-			return new ResponseEntity<>(ngoService.getNgos(), HttpStatus.OK);
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngoService.getNgos(), "Operation Completed");
+			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@GetMapping("/ngo/{id}")
-	public ResponseEntity<Ngo> getNgoById(@PathVariable("id") UUID id) {
+	public ResponseEntity< DataResponse<Ngo> > getNgoById(@PathVariable("id") UUID id) {
 		try {
-			return new ResponseEntity<>(ngoService.getNgosById(id).get(), HttpStatus.OK);
+			Optional<Ngo> ngo = ngoService.getNgosById(id);
+			if (ngo.isPresent()){
+				DataResponse<Ngo> dataResponse = new DataResponse<>(ngo.get(), "Operation Completed");
+				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
+			}
+			else{
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@GetMapping("/ngo/{email}")
-	public ResponseEntity<List<Ngo>> getNgoByEmail(@PathVariable("email") String email){
+	public ResponseEntity< DataResponse<List<Ngo>> > getNgoByEmail(@PathVariable("email") String email){
 		try {
-			return new ResponseEntity<>(ngoService.getNgosByEmail(email), HttpStatus.OK);
+			List<Ngo> ngos = ngoService.getNgosByEmail(email);
+			if (ngos == null)
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngos, "Operation Completed");
+			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@GetMapping("/ngo/{name}")
-	public ResponseEntity<List<Ngo>> getNgoByName(@PathVariable("name") String name){
+	public ResponseEntity< DataResponse<List<Ngo>> > getNgoByName(@PathVariable("name") String name){
 		try {
-			return new ResponseEntity<>(ngoService.getNgosByName(name), HttpStatus.OK);
+			List<Ngo> ngos = ngoService.getNgosByName(name);
+			if (ngos == null)
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngos, "Operation Completed");
+			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
