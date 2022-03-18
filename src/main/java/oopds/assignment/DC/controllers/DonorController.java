@@ -29,7 +29,11 @@ public class DonorController {
 	@GetMapping("/donor")
 	public ResponseEntity< DataResponse<List<Donor>> > getAllDonors() {
 		try {
-			DataResponse<List<Donor>> dataResponse = new DataResponse<>(donorService.getDonors(), "Operation Completed");
+			List<Donor> list = donorService.getDonors();
+			if (list == null)
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+			DataResponse<List<Donor>> dataResponse = new DataResponse<>(list, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

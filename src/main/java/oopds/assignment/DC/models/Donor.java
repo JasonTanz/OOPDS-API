@@ -67,4 +67,9 @@ public class Donor {
 	public void setDonationMade(List<DonationMade> donationMade) {
 		this.donationMade = donationMade;
 	}
+
+	@Override
+	public String toString(){
+		return "Id: " + id + ", Name: " + name + ", Password: " + password;
+	}
 }

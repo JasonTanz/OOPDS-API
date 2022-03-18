@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NgoDAO extends JpaRepository<Ngo, UUID> {
 
-    List<Ngo> findByEmail(String email); // Abstract method
+    List<Ngo> findByEmail(String email); 
     List<Ngo> findByName(String name);
     
 }

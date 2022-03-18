@@ -70,4 +70,9 @@ public class Ngo {
 	public void setDonationRequested(List<DonationRequested> donationRequested) {
 		this.donationRequested = donationRequested;
 	}
+
+	@Override
+	public String toString(){
+		return "Id: " + id + ", Name: " + name + ", Password: " + password + ", Manpower: " + manpower;
+	}
 }

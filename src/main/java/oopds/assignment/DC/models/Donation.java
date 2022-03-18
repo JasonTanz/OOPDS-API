@@ -55,4 +55,9 @@ public class Donation {
 	public void setRemaining(int remaining) {
 		this.remaining = remaining;
 	}
+
+	@Override
+	public String toString(){
+		return "Id: " + id + ", Item: " + item + ", Quantity: " + quantity + ", Remaining: " + remaining;
+	}
 }

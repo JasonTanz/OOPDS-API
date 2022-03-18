@@ -26,6 +26,10 @@ public class NgoController {
 	@GetMapping("/ngo")
 	public ResponseEntity< DataResponse<List<Ngo>> > getAllNgos() {
 		try {
+			List<Ngo> ngos = ngoService.getNgos();
+			if (ngos == null)
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				
 			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngoService.getNgos(), "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {

@@ -38,6 +38,11 @@ public class DonationDistributed {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public String toString(){
+		return "Id: " + id + ", Quantity: " + quantity;
+	}
 }
 
 @Embeddable

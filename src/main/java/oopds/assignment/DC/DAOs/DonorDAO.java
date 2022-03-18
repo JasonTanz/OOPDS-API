@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface DonorDAO extends JpaRepository<Donor, UUID> {
 
-    List<Donor> findByEmail(String email); // Abstract method
+    List<Donor> findByEmail(String email); 
     List<Donor> findByName(String name);
 }

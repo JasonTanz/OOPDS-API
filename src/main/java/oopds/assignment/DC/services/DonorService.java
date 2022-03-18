@@ -17,19 +17,11 @@ public class DonorService {
 	}
 
 	public List<Donor> getDonorsByEmail(String email){
-		List<Donor> donors = donorDAO.findByEmail(email);
-		if (donors.isEmpty())
-			return null;
-		else
-			return donors;
+		return donorDAO.findByEmail(email);
 	}
 
 	public List<Donor> getDonorsByName(String name){
-		List<Donor> donors = donorDAO.findByName(name);
-		if (donors.isEmpty())
-			return null;
-		else
-			return donors;
+		return donorDAO.findByName(name);
 	}
 
 }
