@@ -41,4 +41,24 @@ public class DonorController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@GetMapping("/donor/{email}")
+	public ResponseEntity<List<Donor>> getDonorsByEmail(@PathVariable("email") String email) {
+		try {
+			return new ResponseEntity<>(donorService.getDonorsByEmail(email), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/donor/{name}")
+	public ResponseEntity<List<Donor>> getDonorsByName(@PathVariable("name") String name) {
+		try {
+			return new ResponseEntity<>(donorService.getDonorsByName(name), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	
 }
