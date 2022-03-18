@@ -15,20 +15,13 @@ public class NgoService {
 		return ngoDAO.findById(id);
 	}
 
-	public List<Ngo> getNgosByEmail(String email){
-		List<Ngo> ngos = ngoDAO.findByEmail(email);
-		if (ngos.isEmpty())
-			return null;
-		else
-			return ngos;
-	}
+	// public List<Ngo> getNgosByEmail(String email) {
+	// 	List<Ngo> ngos = ngoDAO.findByEmail(email);
+	// 	if (ngos.isEmpty()) return null; else return ngos;
+	// }
 
-	public List<Ngo> getNgosByName(String name){
+	public List<Ngo> getNgosByName(String name) {
 		List<Ngo> ngos = ngoDAO.findByName(name);
-		if (ngos.isEmpty())
-			return null;
-		else
-			return ngos;
+		if (ngos.isEmpty()) return null; else return ngos;
 	}
-	
 }

@@ -39,22 +39,21 @@ public class NgoController {
 		}
 	}
 
-	@GetMapping("/ngo/{email}")
-	public ResponseEntity<List<Ngo>> getNgoByEmail(@PathVariable("email") String email){
-		try {
-			return new ResponseEntity<>(ngoService.getNgosByEmail(email), HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	// @GetMapping("/ngo/{email}")
+	// public ResponseEntity<List<Ngo>> getNgoByEmail(@PathVariable("email") String email) {
+	// 	try {
+	// 		return new ResponseEntity<>(ngoService.getNgosByEmail(email), HttpStatus.OK);
+	// 	} catch (Exception e) {
+	// 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	// 	}
+	// }
 
 	@GetMapping("/ngo/{name}")
-	public ResponseEntity<List<Ngo>> getNgoByName(@PathVariable("name") String name){
+	public ResponseEntity<List<Ngo>> getNgoByName(@PathVariable("name") String name) {
 		try {
 			return new ResponseEntity<>(ngoService.getNgosByName(name), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 }

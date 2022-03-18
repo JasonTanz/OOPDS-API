@@ -6,8 +6,6 @@ import oopds.assignment.DC.models.Ngo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface NgoDAO extends JpaRepository<Ngo, UUID> {
-
-    List<Ngo> findByEmail(String email); // Abstract method
-    List<Ngo> findByName(String name);
-    
+	// List<Ngo> findByEmail(String email); // Abstract method
+	List<Ngo> findByName(String name);
 }
