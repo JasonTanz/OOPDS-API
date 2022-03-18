@@ -25,6 +25,9 @@ public class Donor {
 	@Column
 	private String password;
 
+	@Column
+	private String email;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "donor_id", referencedColumnName = "id")
 	private List<DonationMade> donationMade;

@@ -2,6 +2,8 @@ package oopds.assignment.DC.models;
 
 import java.util.List;
 import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,10 +16,13 @@ public class Ngo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private UUID id;
-
+	
 	private String name;
 	private String password;
 	private int manpower;
+
+	@Column
+	private String email;
 
 	@OneToMany
 	@JoinColumn(name = "ngo_id", referencedColumnName = "id")
