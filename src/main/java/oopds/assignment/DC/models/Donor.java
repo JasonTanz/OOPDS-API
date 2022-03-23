@@ -26,7 +26,7 @@ import javax.persistence.Id;
  * RESTful APIs operations.
  */
 @Entity
-public class Donor implements UserDetails {
+public class Donor {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -41,9 +41,6 @@ public class Donor implements UserDetails {
 
     @Column
     private String email;
-
-    @Column
-    private String role;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "donor_id", referencedColumnName = "id")
@@ -63,11 +60,10 @@ public class Donor implements UserDetails {
      * @param password The password used to login into Donor's account.
      * @param email    The email address of the Donor.
      */
-    public Donor(String name, String password, String email, String role) {
+    public Donor(String name, String password, String email) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.role = role;
     }
 
     /**
@@ -142,14 +138,6 @@ public class Donor implements UserDetails {
         this.email = email;
     }
 
-    public String getRole() {
-        return this.role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     /**
      * Gets and Returns the List of Donation Made by the donor.
      * 
@@ -177,35 +165,5 @@ public class Donor implements UserDetails {
     @Override
     public String toString() {
         return "Id: " + id + ", Name: " + name + ", Password: " + password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getEmail();
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.getRole()));
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
     }
 }

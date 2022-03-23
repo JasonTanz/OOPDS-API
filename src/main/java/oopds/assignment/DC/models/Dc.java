@@ -1,5 +1,7 @@
 package oopds.assignment.DC.models;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -8,9 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Dc {
+public class Dc implements UserDetails {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -97,15 +102,6 @@ public class Dc {
         this.password = password;
     }
 
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     /**
      * Returns a string representation of all values of the Distribution Center
      * class.
@@ -117,6 +113,41 @@ public class Dc {
         return "Id: " + id + ", Name: " + name + ", Password: " + password;
     }
 
-    
+    public String getEmail() {
+        return this.email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getEmail();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ngo"));
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

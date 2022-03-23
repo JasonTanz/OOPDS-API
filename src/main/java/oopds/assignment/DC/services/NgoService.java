@@ -18,7 +18,9 @@ import oopds.assignment.DC.models.Ngo;
  * This service class contains the operations that involves the Ngo.
  */
 public class NgoService {
+    @Autowired
     private NgoDAO ngoDAO;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired

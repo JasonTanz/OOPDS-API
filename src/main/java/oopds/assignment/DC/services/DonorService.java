@@ -1,19 +1,16 @@
 package oopds.assignment.DC.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import oopds.assignment.DC.DAOs.DonorDAO;
 import oopds.assignment.DC.models.Donor;
+import oopds.assignment.DC.models.DonationMade;
 
 /**
  * A Service Class to be used by the Spring API to do certain operations based
@@ -21,24 +18,11 @@ import oopds.assignment.DC.models.Donor;
  * This service class contains the operations that involves the Donor.
  */
 @Service
-public class DonorService implements UserDetailsService {
+public class DonorService {
     @Autowired
     private final DonorDAO donorDAO;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        System.out.println("email");
-        System.out.println(email);
-        UserDetails donor = donorDAO.findByEmail(email);
-        System.out.println(donor);
-        if (donor == null) {
-            throw new UsernameNotFoundException("Not found!");
-        }
-
-        return donor;
-    }
 
     @Autowired
     public DonorService(DonorDAO donorDAO, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -70,8 +54,8 @@ public class DonorService implements UserDetailsService {
      * 
      * @return an Optional Object, containing the Donor based on ID in database.
      */
-    public Optional<Donor> getDonorsById(UUID id) {
-        return donorDAO.findById(id);
+    public Donor getDonorsById(UUID id) {
+        return donorDAO.findById(id).get();
     }
 
     /**
@@ -92,4 +76,9 @@ public class DonorService implements UserDetailsService {
         return donorDAO.findByName(name);
     }
 
+    public void addDonationMadeById(UUID id, DonationMade donationMade) {
+        Donor donor = this.getDonorsById(id);
+        donor.getDonationMade().add(donationMade);
+        donorDAO.save(donor);
+    }
 }

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This Controller is responsible for Controlling operations for Ngo Entities.
  */
 @RestController
-@RequestMapping("/dc")
+@RequestMapping("/api")
 public class NgoController {
 
 	@Autowired
