@@ -26,13 +26,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO Auto-generated method stub
+
         auth.userDetailsService(donorDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // TODO Auto-generated method stub
 
         http.formLogin().loginPage("/api/auth/donor/login").usernameParameter("email");
         http.csrf().disable();

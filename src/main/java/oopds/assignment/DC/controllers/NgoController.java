@@ -5,8 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import oopds.assignment.DC.models.DataResponse;
-import oopds.assignment.DC.models.Donor;
-import oopds.assignment.DC.services.DonorService;
+import oopds.assignment.DC.models.Ngo;
+import oopds.assignment.DC.services.NgoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,33 +19,34 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * A Controller is a Class that controls the operations of the web service by
  * creating a REST API.
- * This Controller is responsible for Controlling operations for Donor Entities.
+ * This Controller is responsible for Controlling operations for Ngo Entities.
  */
 @RestController
 @RequestMapping("/dc")
-public class DonorController {
+public class NgoController {
 
 	@Autowired
-	DonorService donorService;
+	NgoService ngoService;
+	// NgoDAO ngoDAO;
 
 	/**
-	 * Gets and Sends all Donors available in the database as a resource to the web.
-	 * If there's no Donors in the database (null), then it will return a HTTP error
+	 * Gets and Sends all Ngos available in the database as a resource to the web.
+	 * If there's no Ngos in the database (null), then it will return a HTTP error
 	 * code.
 	 * 
-	 * @return a ResponseEntity Object, which contains a List of Donors and the
+	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/donor")
-	public ResponseEntity<DataResponse<List<Donor>>> getAllDonors() {
+	@GetMapping("/ngo")
+	public ResponseEntity<DataResponse<List<Ngo>>> getAllNgos() {
 		try {
-			List<Donor> list = donorService.getDonors();
-			if (list == null)
+			List<Ngo> ngos = ngoService.getNgos();
+			if (ngos == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-			DataResponse<List<Donor>> dataResponse = new DataResponse<>(list, "Operation Completed");
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngoService.getNgos(), "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,21 +54,20 @@ public class DonorController {
 	}
 
 	/**
-	 * Gets and Sends the Donors in the database based on ID as a resource to the
-	 * web.
-	 * If there's no Donors with the specified ID, then it will return a HTTP error
+	 * Gets and Sends the Ngos in the database based on ID as a resource to the web.
+	 * If there's no Ngos with the specified ID, then it will return a HTTP error
 	 * code.
 	 * 
-	 * @return a ResponseEntity Object, which contains the Donor and the appropriate
+	 * @return a ResponseEntity Object, which contains the Ngo and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/donor/{id}")
-	public ResponseEntity<DataResponse<Donor>> getDonorById(@PathVariable("id") UUID id) {
+	@GetMapping("/ngo/{id}")
+	public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID id) {
 		try {
-			Optional<Donor> donor = donorService.getDonorsById(id);
-			if (donor.isPresent()) {
-				DataResponse<Donor> dataResponse = new DataResponse<>(donor.get(), "Operation Completed");
+			Optional<Ngo> ngo = ngoService.getNgoById(id);
+			if (ngo.isPresent()) {
+				DataResponse<Ngo> dataResponse = new DataResponse<>(ngo.get(), "Operation Completed");
 				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -78,24 +78,24 @@ public class DonorController {
 	}
 
 	/**
-	 * Gets and Sends all Donors based on their Email in the database as a resource
-	 * to the web.
-	 * If there's no Donors matching the email specified in the database (null),
-	 * then it will return a HTTP error code.
+	 * Gets and Sends all Ngos based on their Email in the database as a resource to
+	 * the web.
+	 * If there's no Ngos matching the email specified in the database (null), then
+	 * it will return a HTTP error code.
 	 * 
-	 * @return a ResponseEntity Object, which contains a List of Donors and the
+	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/donor/{email}")
-	public ResponseEntity<DataResponse<Donor>> getDonorsByEmail(@PathVariable("email") String email) {
+	@GetMapping("/ngo/{email}")
+	public ResponseEntity<DataResponse<Ngo>> getNgoByEmail(@PathVariable("email") String email) {
 		try {
-			Donor donor = donorService.getDonorsByEmail(email);
-			if (donor == null)
+			Ngo ngo = ngoService.getNgoByEmail(email);
+			if (ngo == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-			DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
+			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -103,24 +103,24 @@ public class DonorController {
 	}
 
 	/**
-	 * Gets and Sends all Donors based on their Name in the database as a resource
-	 * to the web.
-	 * If there's no Donors matching the name specified in the database (null), then
+	 * Gets and Sends all Ngos based on their Name in the database as a resource to
+	 * the web.
+	 * If there's no Ngos matching the name specified in the database (null), then
 	 * it will return a HTTP error code.
 	 * 
-	 * @return a ResponseEntity Object, which contains a List of Donors and the
+	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/donor/{name}")
-	public ResponseEntity<DataResponse<Donor>> getDonorsByName(@PathVariable("name") String name) {
+	@GetMapping("/ngo/{name}")
+	public ResponseEntity<DataResponse<Ngo>> getNgoByName(@PathVariable("name") String name) {
 		try {
-			Donor donor = donorService.getDonorsByName(name);
-			if (donor == null)
+			Ngo ngo = ngoService.getNgoByName(name);
+			if (ngo == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-			DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
+			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
