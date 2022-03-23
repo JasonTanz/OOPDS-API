@@ -20,6 +20,7 @@ import oopds.assignment.DC.services.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -87,6 +88,7 @@ public class DonorController {
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-id/{id}")
+	@PreAuthorize("hasRole('ROLE_WRITE')")
 	public ResponseEntity<DataResponse<Donor>> getDonorById(@PathVariable("id") UUID id) {
 		try {
 			Donor donor = donorService.getDonorsById(id);
@@ -152,6 +154,7 @@ public class DonorController {
 	}
 
 	@PostMapping("/donor/donate")
+	@PreAuthorize("hasRole('ROLE_WRITE')")
 	public ResponseEntity<?> addDonationMade(@RequestBody Map<String, String> json) {
 
 		System.out.println(json.get("donor_id"));

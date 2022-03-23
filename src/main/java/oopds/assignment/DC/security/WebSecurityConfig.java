@@ -5,20 +5,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.RequiredArgsConstructor;
+import oopds.assignment.DC.filter.JWTAuthFilter;
 import oopds.assignment.DC.filter.authFilter;
 
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private JWTAuthFilter jwtauthfilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,8 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // http.formLogin().loginPage("/api/auth/donor/login").usernameParameter("email");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeHttpRequests().anyRequest().permitAll();
+        // http.authorizeHttpRequests().anyRequest().permitAll();
         http.addFilter(new authFilter(authenticationManagerBean()));
+        http.addFilterBefore(jwtauthfilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
