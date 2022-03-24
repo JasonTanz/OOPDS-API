@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import oopds.assignment.DC.services.DcService;
 import oopds.assignment.DC.services.DonorService;
 import oopds.assignment.DC.services.NgoService;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -83,7 +85,8 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/ngo/login")
+    
+    @PostMapping("/donor/login")
     public ResponseEntity<?> donorLogin(@RequestBody Donor donor) {
         try {
 
@@ -119,7 +122,7 @@ public class AuthController {
         return null;
     }
 
-    @PostMapping("/donor/login")
+    @PostMapping("/ngo/login")
     public ResponseEntity<?> ngoLogin(@RequestBody Ngo ngo) {
         try {
 
@@ -155,6 +158,7 @@ public class AuthController {
         return null;
     }
 
+    @CrossOrigin
     @PostMapping("/dc/login")
     public ResponseEntity<?> dcLogin(@RequestBody Dc dc) {
         try {

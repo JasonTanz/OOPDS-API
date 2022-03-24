@@ -1,5 +1,9 @@
 package oopds.assignment.DC.security;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +17,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.RequiredArgsConstructor;
 import oopds.assignment.DC.filter.JWTAuthFilter;
@@ -35,11 +42,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         // http.formLogin().loginPage("/api/auth/donor/login").usernameParameter("email");
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // http.cors().and().csrf().disable().authorizeRequests().antMatchers("/api/auth/**").permitAll().anyRequest()
+        // .authenticated();
+        // http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // // http.authorizeHttpRequests().anyRequest().permitAll();
+        // http.addFilter(new authFilter(authenticationManagerBean()));
+        // http.addFilterBefore(jwtauthfilter,
+        // UsernamePasswordAuthenticationFilter.class);
+
+        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/api/auth/**").permitAll().anyRequest()
+                .authenticated().and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .addFilterBefore(jwtauthfilter,
+                        UsernamePasswordAuthenticationFilter.class);
+        ;
         // http.authorizeHttpRequests().anyRequest().permitAll();
-        http.addFilter(new authFilter(authenticationManagerBean()));
-        http.addFilterBefore(jwtauthfilter, UsernamePasswordAuthenticationFilter.class);
+        // http.addFilter(new authFilter(authenticationManagerBean()));
+
     }
 
     @Bean

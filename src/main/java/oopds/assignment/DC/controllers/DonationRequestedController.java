@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.DonationRequested;
@@ -23,6 +24,8 @@ import oopds.assignment.DC.services.DonationRequestedService;
  */
 @RestController
 @RequestMapping("/dc")
+@CrossOrigin
+
 public class DonationRequestedController {
 
     private DonationRequestedService donationRequestedService;

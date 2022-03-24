@@ -8,6 +8,7 @@ import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.Ngo;
 import oopds.assignment.DC.services.NgoService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * creating a REST API.
  * This Controller is responsible for Controlling operations for Ngo Entities.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class NgoController {
