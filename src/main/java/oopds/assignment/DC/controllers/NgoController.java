@@ -1,11 +1,14 @@
 package oopds.assignment.DC.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 import oopds.assignment.DC.models.DataResponse;
+import oopds.assignment.DC.models.DonationRequested;
 import oopds.assignment.DC.models.Ngo;
+import oopds.assignment.DC.services.DonationRequestedService;
 import oopds.assignment.DC.services.NgoService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +34,13 @@ public class NgoController {
 
 	@Autowired
 	NgoService ngoService;
-	// NgoDAO ngoDAO;
+	DonationRequestedService donationRequestedService;
+
+	@Autowired
+	public NgoController(NgoService ngoService, DonationRequestedService donationRequestedService) {
+		this.ngoService = ngoService;
+		this.donationRequestedService = donationRequestedService;
+	}
 
 	/**
 	 * Gets and Sends all Ngos available in the database as a resource to the web.
@@ -64,20 +75,22 @@ public class NgoController {
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/ngo/{id}")
-	public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID id) {
-		try {
-			Optional<Ngo> ngo = ngoService.getNgoById(id);
-			if (ngo.isPresent()) {
-				DataResponse<Ngo> dataResponse = new DataResponse<>(ngo.get(), "Operation Completed");
-				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			}
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	// @GetMapping("/ngo/{id}")
+	// public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID
+	// id) {
+	// try {
+	// Ngo ngo = ngoService.getNgoById(id);
+	// if (ngo != null) {
+	// DataResponse<Ngo> dataResponse = new DataResponse<>(ngo.get(), "Operation
+	// Completed");
+	// return new ResponseEntity<>(dataResponse, HttpStatus.OK);
+	// } else {
+	// return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	// }
+	// } catch (Exception e) {
+	// return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	// }
+	// }
 
 	/**
 	 * Gets and Sends all Ngos based on their Email in the database as a resource to
@@ -127,6 +140,22 @@ public class NgoController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@PostMapping("/ngo/request")
+	public ResponseEntity<?> addDonationRequest(@RequestBody Map<String, String> data) {
+		DonationRequested donationRequested = donationRequestedService.addDonationRequested(
+				new DonationRequested(data.get("item"), Integer.parseInt(data.get("quantity")),
+						Integer.parseInt(data.get("remaining"))));
+		ngoService.addDonationRequestedById(UUID.fromString(data.get("ngo_id")), donationRequested);
+		return null;
+	}
+
+	@GetMapping("/ngo/donation_requested/{id}")
+	public Ngo getDonationRequested(@PathVariable("id") UUID id) {
+		Ngo ngo = ngoService.getNgoById(id);
+		ngo.setPassword("");
+		return ngo;
 	}
 
 }

@@ -36,4 +36,8 @@ public class DonationMadeService {
         donationMade.setRemaining(remaining);
         return donationMadeDAO.save(donationMade);
     }
+
+    public List<DonationMade> findByDonorId(UUID id) {
+        return donationMadeDAO.findByDonorId(id);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import oopds.assignment.DC.DAOs.NgoDAO;
+import oopds.assignment.DC.models.DonationRequested;
 import oopds.assignment.DC.models.Ngo;
 
 @Service
@@ -51,8 +52,8 @@ public class NgoService {
      * 
      * @return an Optional Object, containing the Ngo based on ID in database.
      */
-    public Optional<Ngo> getNgoById(UUID id) {
-        return ngoDAO.findById(id);
+    public Ngo getNgoById(UUID id) {
+        return ngoDAO.findById(id).get();
     }
 
     /**
@@ -71,6 +72,12 @@ public class NgoService {
      */
     public Ngo getNgoByName(String name) {
         return ngoDAO.findByName(name);
+    }
+
+    public void addDonationRequestedById(UUID id, DonationRequested donationRequested) {
+        Ngo ngo = this.getNgoById(id);
+        ngo.getDonationRequested().add(donationRequested);
+        ngoDAO.save(ngo);
     }
 
 }

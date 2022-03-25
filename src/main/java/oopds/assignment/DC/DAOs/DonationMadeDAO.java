@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import oopds.assignment.DC.models.DonationMade;
@@ -20,6 +21,9 @@ public interface DonationMadeDAO extends JpaRepository<DonationMade, UUID> {
     public List<DonationMade> findByQuantity(int quantity);
 
     public List<DonationMade> findByRemaining(int remaining);
+
+    @Query(value = "SELECT d FROM DonationMade d")
+    public List<DonationMade> findByDonorId(@Param("id") UUID id);
 
     @Query(value = "SELECT d FROM donation_made d WHERE d.REMAINING > 0", nativeQuery = true)
     public List<DonationMade> findAllRemaining();

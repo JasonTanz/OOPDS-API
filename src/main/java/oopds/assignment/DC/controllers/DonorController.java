@@ -169,4 +169,11 @@ public class DonorController {
 		return null;
 	}
 
+	@GetMapping("/donor/donation_made/{id}")
+	public Donor getDonationMade(@PathVariable("id") UUID id) {
+		Donor donor = donorService.getDonorsById(id);
+		donor.setPassword("");
+		return donor;
+	};
+
 }

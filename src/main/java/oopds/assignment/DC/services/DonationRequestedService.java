@@ -59,6 +59,11 @@ public class DonationRequestedService {
      */
     public List<DonationRequested> getDonationsRequestedByRemaining(int remaining) {
         return donationRequestedDAO.findByRemaining(remaining);
+
+    }
+
+    public DonationRequested addDonationRequested(DonationRequested data) {
+        return donationRequestedDAO.save(data);
     }
 
 }
