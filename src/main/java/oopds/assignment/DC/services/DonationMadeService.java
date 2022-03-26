@@ -40,4 +40,18 @@ public class DonationMadeService {
     public List<DonationMade> findByDonorId(UUID id) {
         return donationMadeDAO.findByDonorId(id);
     }
+
+    public List<DonationMade> findByItem(String item) {
+        return donationMadeDAO.findByItem(item);
+    }
+
+    public DonationMade save(DonationMade donationMade) {
+
+        try {
+            return donationMadeDAO.save(donationMade);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

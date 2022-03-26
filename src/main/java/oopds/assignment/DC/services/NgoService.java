@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import oopds.assignment.DC.DAOs.NgoDAO;
+import oopds.assignment.DC.models.DonationDistributed;
 import oopds.assignment.DC.models.DonationRequested;
 import oopds.assignment.DC.models.Ngo;
 
@@ -76,7 +77,9 @@ public class NgoService {
 
     public void addDonationRequestedById(UUID id, DonationRequested donationRequested) {
         Ngo ngo = this.getNgoById(id);
+        System.out.println(ngo);
         ngo.getDonationRequested().add(donationRequested);
+        donationRequested.setNgo(ngo);
         ngoDAO.save(ngo);
     }
 

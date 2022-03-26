@@ -88,6 +88,7 @@ public class DonationDistributed {
 	public String toString() {
 		return "Id: " + id + ", Quantity: " + quantity;
 	}
+
 }
 
 /**
@@ -144,4 +145,5 @@ class DonationDistributedId implements Serializable {
 	public void setDonationRequested_id(DonationRequested donationRequested) {
 		this.donationRequested = donationRequested;
 	}
+
 }

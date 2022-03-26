@@ -50,11 +50,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // http.addFilterBefore(jwtauthfilter,
         // UsernamePasswordAuthenticationFilter.class);
 
-        http.cors().and().csrf().disable().authorizeRequests().antMatchers("/api/auth/**").permitAll().anyRequest()
-                .authenticated().and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .addFilterBefore(jwtauthfilter,
-                        UsernamePasswordAuthenticationFilter.class);
+        http.cors()
+                .and().csrf().disable()
+        // .authorizeRequests().antMatchers("/api/auth/**").permitAll().anyRequest()
+        // .authenticated().and()
+        // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        // .addFilterBefore(jwtauthfilter,
+        // UsernamePasswordAuthenticationFilter.class);
         ;
         // http.authorizeHttpRequests().anyRequest().permitAll();
         // http.addFilter(new authFilter(authenticationManagerBean()));

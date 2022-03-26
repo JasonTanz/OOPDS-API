@@ -143,12 +143,17 @@ public class NgoController {
 	}
 
 	@PostMapping("/ngo/request")
-	public ResponseEntity<?> addDonationRequest(@RequestBody Map<String, String> data) {
+	public DonationRequested addDonationRequest(@RequestBody Map<String, String> data) {
 		DonationRequested donationRequested = donationRequestedService.addDonationRequested(
 				new DonationRequested(data.get("item"), Integer.parseInt(data.get("quantity")),
 						Integer.parseInt(data.get("remaining"))));
 		ngoService.addDonationRequestedById(UUID.fromString(data.get("ngo_id")), donationRequested);
-		return null;
+
+		// donationRequestedService.addDonationRequested(data.get("item"),
+		// Integer.parseInt(data.get("quantity")),
+		// Integer.parseInt(data.get("remaining")));
+
+		return donationRequested;
 	}
 
 	@GetMapping("/ngo/donation_requested/{id}")

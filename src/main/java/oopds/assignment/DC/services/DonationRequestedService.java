@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import oopds.assignment.DC.DAOs.DonationRequestedDAO;
 import oopds.assignment.DC.models.DonationRequested;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +20,11 @@ import org.springframework.stereotype.Service;
 public class DonationRequestedService {
 
     private DonationRequestedDAO donationRequestedDAO;
+
+    @Autowired
+    public DonationRequestedService(DonationRequestedDAO donationRequestedDAO) {
+        this.donationRequestedDAO = donationRequestedDAO;
+    }
 
     /**
      * Gets and Return all Donation Requested Entity available in the Database.
@@ -58,7 +65,7 @@ public class DonationRequestedService {
      *         remaining amount of item requested.
      */
     public List<DonationRequested> getDonationsRequestedByRemaining(int remaining) {
-        return donationRequestedDAO.findByRemaining(remaining);
+        return donationRequestedDAO.findByRemaining();
 
     }
 
@@ -66,4 +73,17 @@ public class DonationRequestedService {
         return donationRequestedDAO.save(data);
     }
 
+    public DonationRequested updateRemainingById(UUID id, int remaining) {
+        DonationRequested donationRequested = donationRequestedDAO.findById(id).get();
+        donationRequested.setRemaining(remaining);
+        return donationRequestedDAO.save(donationRequested);
+    }
+
+    public DonationRequested getById(UUID id) {
+        return donationRequestedDAO.findById(id).get();
+    }
+
+    public List<DonationRequested> findByItem(String item) {
+        return donationRequestedDAO.findByItem(item);
+    }
 }

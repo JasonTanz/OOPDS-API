@@ -17,12 +17,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * A Database Entity that stores Ngo's data values to be used for the Spring
  * RESTful APIs operations.
  */
 @Entity
-public class Ngo implements UserDetails {
+public class Ngo {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
@@ -36,8 +38,8 @@ public class Ngo implements UserDetails {
 	@Column
 	private String email;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "ngo_id", referencedColumnName = "id")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "ngo")
+	@JsonIgnoreProperties("ngo")
 	private List<DonationRequested> donationRequested;
 
 	/**
@@ -182,33 +184,4 @@ public class Ngo implements UserDetails {
 		return "Id: " + id + ", Name: " + name + ", Password: " + password + ", Manpower: " + manpower;
 	}
 
-	@Override
-	public String getUsername() {
-		return this.getEmail();
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("ngo"));
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
 }

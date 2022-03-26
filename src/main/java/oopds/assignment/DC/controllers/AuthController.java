@@ -50,14 +50,14 @@ public class AuthController {
 
         if (donorExists == null) {
             donorService.addNewDonor(donor);
+
             String accessToken = JWT.create()
-                    .withSubject(donor.getName())
+                    .withClaim("role", "Donor")
                     .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                    // .withClaim("permission_level", user.getAuthorities())
                     .sign(algorithm);
 
             String refreshToken = JWT.create()
-                    .withSubject(donor.getName())
+                    .withClaim("role", "Donor")
                     .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
                     .sign(algorithm);
             Map<String, Object> data = new HashMap<>();
@@ -85,7 +85,6 @@ public class AuthController {
         }
     }
 
-    
     @PostMapping("/donor/login")
     public ResponseEntity<?> donorLogin(@RequestBody Donor donor) {
         try {
@@ -96,13 +95,13 @@ public class AuthController {
                 Boolean passwordMatch = bCryptPasswordEncoder.matches(donor.getPassword(), donorExist.getPassword());
                 if (passwordMatch) {
                     String accessToken = JWT.create()
-                            .withSubject(donorExist.getName())
+                            .withClaim("role", "Donor")
                             .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                            // .withClaim("permission_level", user.getAuthorities())
+
                             .sign(algorithm);
 
                     String refreshToken = JWT.create()
-                            .withSubject(donorExist.getName())
+                            .withClaim("role", "Donor")
                             .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
                             .sign(algorithm);
                     Map<String, Object> data = new HashMap<>();
@@ -132,13 +131,12 @@ public class AuthController {
                 Boolean passwordMatch = bCryptPasswordEncoder.matches(ngo.getPassword(), ngoExist.getPassword());
                 if (passwordMatch) {
                     String accessToken = JWT.create()
-                            .withSubject(ngoExist.getName())
+                            .withClaim("role", "Ngo")
                             .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                            // .withClaim("permission_level", user.getAuthorities())
                             .sign(algorithm);
 
                     String refreshToken = JWT.create()
-                            .withSubject(ngoExist.getName())
+                            .withClaim("role", "Ngo")
                             .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
                             .sign(algorithm);
                     Map<String, Object> data = new HashMap<>();
@@ -169,13 +167,12 @@ public class AuthController {
                 Boolean passwordMatch = bCryptPasswordEncoder.matches(dc.getPassword(), dcExists.getPassword());
                 if (passwordMatch) {
                     String accessToken = JWT.create()
-                            .withSubject(dcExists.getName())
+                            .withClaim("role", "Dc")
                             .withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                            // .withClaim("permission_level", user.getAuthorities())
                             .sign(algorithm);
 
                     String refreshToken = JWT.create()
-                            .withSubject(dcExists.getName())
+                            .withClaim("role", "Dc")
                             .withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
                             .sign(algorithm);
                     Map<String, Object> data = new HashMap<>();

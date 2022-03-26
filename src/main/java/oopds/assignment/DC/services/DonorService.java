@@ -78,7 +78,9 @@ public class DonorService {
 
     public void addDonationMadeById(UUID id, DonationMade donationMade) {
         Donor donor = this.getDonorsById(id);
+        System.out.println(donor);
         donor.getDonationMade().add(donationMade);
+        donationMade.setDonor(donor);
         donorDAO.save(donor);
     }
 }

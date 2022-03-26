@@ -2,6 +2,9 @@ package oopds.assignment.DC.models;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -12,7 +15,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,9 +52,8 @@ public class Donor {
 
     @Column
     private String email;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "donor_id", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "donor")
+    @JsonIgnoreProperties("donor")
     private List<DonationMade> donationMade;
 
     /**

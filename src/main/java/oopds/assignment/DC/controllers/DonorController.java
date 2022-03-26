@@ -91,7 +91,7 @@ public class DonorController {
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-id/{id}")
-	@PreAuthorize("hasRole('ROLE_WRITE')")
+	// @PreAuthorize("hasRole('ROLE_WRITE')")
 	public ResponseEntity<DataResponse<Donor>> getDonorById(@PathVariable("id") UUID id) {
 		try {
 			Donor donor = donorService.getDonorsById(id);
@@ -157,8 +157,8 @@ public class DonorController {
 	}
 
 	@PostMapping("/donor/donate")
-	@PreAuthorize("hasRole('ROLE_WRITE')")
-	public ResponseEntity<?> addDonationMade(@RequestBody Map<String, String> json) {
+	// @PreAuthorize("hasRole('ROLE_WRITE')")
+	public DonationMade addDonationMade(@RequestBody Map<String, String> json) {
 
 		System.out.println(json.get("donor_id"));
 		DonationMade donationMade = donationMadeService
@@ -166,7 +166,7 @@ public class DonorController {
 						Integer.parseInt(json.get("remaining"))));
 
 		donorService.addDonationMadeById(UUID.fromString(json.get("donor_id")), donationMade);
-		return null;
+		return donationMade;
 	}
 
 	@GetMapping("/donor/donation_made/{id}")

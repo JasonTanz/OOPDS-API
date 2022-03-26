@@ -23,12 +23,16 @@ import oopds.assignment.DC.services.DonationRequestedService;
  * Requested Entities.
  */
 @RestController
-@RequestMapping("/dc")
+@RequestMapping("/api")
 @CrossOrigin
 
 public class DonationRequestedController {
 
     private DonationRequestedService donationRequestedService;
+
+    public DonationRequestedController(DonationRequestedService donationRequestedService) {
+        this.donationRequestedService = donationRequestedService;
+    }
 
     /**
      * Gets and Sends all Donations Requested available in the database as a
@@ -139,6 +143,12 @@ public class DonationRequestedController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/donation-requested/by-item/{item}")
+    public List<DonationRequested> findByItem(@PathVariable("item") String item) {
+        List<DonationRequested> donationMade = donationRequestedService.findByItem(item);
+        return donationMade;
     }
 
 }

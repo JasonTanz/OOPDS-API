@@ -22,10 +22,12 @@ public interface DonationMadeDAO extends JpaRepository<DonationMade, UUID> {
 
     public List<DonationMade> findByRemaining(int remaining);
 
+    public List<DonationMade> findByItem(String item);
+
     @Query(value = "SELECT d FROM DonationMade d")
     public List<DonationMade> findByDonorId(@Param("id") UUID id);
 
-    @Query(value = "SELECT d FROM donation_made d WHERE d.REMAINING > 0", nativeQuery = true)
+    @Query(value = "SELECT d FROM DonationMade d WHERE d.REMAINING > 0", nativeQuery = true)
     public List<DonationMade> findAllRemaining();
 
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
 import oopds.assignment.DC.models.DonationRequested;
 
@@ -15,7 +16,11 @@ import oopds.assignment.DC.models.DonationRequested;
  */
 @Repository
 public interface DonationRequestedDAO extends JpaRepository<DonationRequested, UUID> {
+
     List<DonationRequested> findByQuantity(int quantity);
 
-    List<DonationRequested> findByRemaining(int remaining);
+    List<DonationRequested> findByItem(String item);
+
+    @Query(value = "SELECT d FROM DonationRequested d WHERE d.remaining>0", nativeQuery = true)
+    List<DonationRequested> findByRemaining();
 }
