@@ -19,6 +19,7 @@ public interface DonationRequestedDAO extends JpaRepository<DonationRequested, U
 
     List<DonationRequested> findByQuantity(int quantity);
 
+    @Query(value = "SELECT d.id, d.item, d.remaining, d.quantity, d.ngo_id FROM donation_requested d WHERE d.item = ?1 AND d.remaining > 0", nativeQuery = true)
     List<DonationRequested> findByItem(String item);
 
     @Query(value = "SELECT d FROM DonationRequested d WHERE d.remaining>0", nativeQuery = true)

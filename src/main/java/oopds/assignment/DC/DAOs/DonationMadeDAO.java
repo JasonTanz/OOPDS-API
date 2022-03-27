@@ -22,6 +22,7 @@ public interface DonationMadeDAO extends JpaRepository<DonationMade, UUID> {
 
     public List<DonationMade> findByRemaining(int remaining);
 
+    @Query(value = "SELECT d.id, d.item, d.remaining, d.quantity, d.donor_id FROM donation_made d WHERE d.item = ?1 AND d.remaining > 0", nativeQuery = true)
     public List<DonationMade> findByItem(String item);
 
     @Query(value = "SELECT d FROM DonationMade d")
