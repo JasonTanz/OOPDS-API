@@ -19,7 +19,7 @@ public class DonationRequested extends Donation {
 
 	@ManyToOne
 	@JoinColumn(name = "ngo_id")
-	@JsonIgnoreProperties("donationRequested")
+	@JsonIgnoreProperties({"donationRequested","password"})
 	private Ngo ngo;
 
 	@Column
@@ -45,18 +45,41 @@ public class DonationRequested extends Donation {
 		super(item, quantity, remaining);
 	}
 
+	/**
+	* Gets and Returns the Donor Name that associates with Donation Requested based on
+	* parameters given.
+	*
+	* @return the Donor Name related to the Donation Requested
+	*/
 	public List<String> getDonorName() {
 		return this.donorName;
 	}
 
+	/**
+     * Updates and changes the Donor Name associated with Donation Requested based on parameter
+     * given.
+     * 
+     * @param donorName The new list of donor name associated with Donation Requested 
+     */
 	public void setDonorName(List<String> donorName) {
 		this.donorName = donorName;
 	}
 
+	/**
+	 * Gets and Returns the Ngo that associates with Donation Requested
+	 * 
+	 * @return the Ngo related to this Donation Requested
+	 */
 	public Ngo getNgo() {
 		return this.ngo;
 	}
 
+	/**
+     * Updates and changes the Ngo associated with Donation Requested based on parameter
+     * given.
+     * 
+     * @param ngo The new Ngo associated with Donation Requested 
+     */
 	public void setNgo(Ngo ngo) {
 		this.ngo = ngo;
 	}

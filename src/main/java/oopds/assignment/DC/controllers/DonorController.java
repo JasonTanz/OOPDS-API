@@ -40,20 +40,18 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 
 public class DonorController {
-
+	
 	@Autowired
 	DonorService donorService;
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-	private final DonationMadeService donationMadeService;
+	// private final DonationMadeService donationMadeService;
 
 	@Autowired
 	public DonorController(DonorService donorService, BCryptPasswordEncoder bCryptPasswordEncoder,
 			DonationMadeService donationMadeService) {
 		this.donorService = donorService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-		this.donationMadeService = donationMadeService;
-
 	}
 
 	/**
@@ -69,7 +67,7 @@ public class DonorController {
 	@GetMapping("/donor")
 	public ResponseEntity<DataResponse<List<Donor>>> getAllDonors() {
 		try {
-			List<Donor> list = donorService.getDonors();
+			List<Donor> list = donorService.findAll();
 			if (list == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -86,6 +84,7 @@ public class DonorController {
 	 * If there's no Donors with the specified ID, then it will return a HTTP error
 	 * code.
 	 * 
+	 * @param id The id to be searched for.
 	 * @return a ResponseEntity Object, which contains the Donor and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
@@ -94,7 +93,7 @@ public class DonorController {
 	// @PreAuthorize("hasRole('ROLE_WRITE')")
 	public ResponseEntity<DataResponse<Donor>> getDonorById(@PathVariable("id") UUID id) {
 		try {
-			Donor donor = donorService.getDonorsById(id);
+			Donor donor = donorService.findById(id);
 			if (donor != null) {
 				DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
 				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
@@ -112,15 +111,16 @@ public class DonorController {
 	 * If there's no Donors matching the email specified in the database (null),
 	 * then it will return a HTTP error code.
 	 * 
+	 * @param email The email to be searched for.
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/donor/{email}")
+	@GetMapping("/donor/by-email/{email}")
 	public ResponseEntity<DataResponse<Donor>> getDonorsByEmail(@PathVariable("email") String email) {
 		try {
-			Donor donor = donorService.getDonorsByEmail(email);
+			Donor donor = donorService.findByEmail(email);
 			if (donor == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -137,43 +137,45 @@ public class DonorController {
 	 * If there's no Donors matching the name specified in the database (null), then
 	 * it will return a HTTP error code.
 	 * 
+	 * @param name The name to be searched for
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/donor/{name}")
+	@GetMapping("/donor/by-name/{name}")
 	public ResponseEntity<DataResponse<Donor>> getDonorsByName(@PathVariable("name") String name) {
 		try {
-			Donor donor = donorService.getDonorsByName(name);
+			Donor donor = donorService.findByName(name);
 			if (donor == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
-			DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
-			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
+			else{
+				DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
+				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
+			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
-	@PostMapping("/donor/donate")
-	// @PreAuthorize("hasRole('ROLE_WRITE')")
-	public DonationMade addDonationMade(@RequestBody Map<String, String> json) {
+	// @PostMapping("/donor/donate")
+	// // @PreAuthorize("hasRole('ROLE_WRITE')")
+	// public DonationMade addDonationMade(@RequestBody Map<String, String> json) {
 
-		System.out.println(json.get("donor_id"));
-		DonationMade donationMade = donationMadeService
-				.addDonationMade(new DonationMade(json.get("item"), Integer.parseInt(json.get("quantity")),
-						Integer.parseInt(json.get("remaining"))));
+	// 	System.out.println(json.get("donor_id"));
+	// 	DonationMade donationMade = donationMadeService
+	// 			.add(new DonationMade(json.get("item"), Integer.parseInt(json.get("quantity")),
+	// 					Integer.parseInt(json.get("remaining"))));
 
-		donorService.addDonationMadeById(UUID.fromString(json.get("donor_id")), donationMade);
-		return donationMade;
-	}
+	// 	// donorService.addDonationMadeById(UUID.fromString(json.get("donor_id")), donationMade);
+	// 	return donationMade;
+	// }
 
-	@GetMapping("/donor/donation_made/{id}")
-	public Donor getDonationMade(@PathVariable("id") UUID id) {
-		Donor donor = donorService.getDonorsById(id);
-		donor.setPassword("");
-		return donor;
-	};
+	// @GetMapping("/donor/donation_made/{id}")
+	// public Donor getDonationMade(@PathVariable("id") UUID id) {
+	// 	Donor donor = donorService.getById(id);
+	// 	donor.setPassword("");
+	// 	return donor;
+	// };
 
 }

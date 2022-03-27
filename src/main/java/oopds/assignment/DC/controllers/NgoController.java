@@ -36,6 +36,12 @@ public class NgoController {
 	NgoService ngoService;
 	DonationRequestedService donationRequestedService;
 
+	/**
+	* This is a constructor for the NgoController controller with the specified parameters.
+	*
+	* @param ngoService The service class for the Ngo.
+	* @param donationRequestedService The service class for the Donation Requested.S
+	*/
 	@Autowired
 	public NgoController(NgoService ngoService, DonationRequestedService donationRequestedService) {
 		this.ngoService = ngoService;
@@ -55,11 +61,11 @@ public class NgoController {
 	@GetMapping("/ngo")
 	public ResponseEntity<DataResponse<List<Ngo>>> getAllNgos() {
 		try {
-			List<Ngo> ngos = ngoService.getNgos();
+			List<Ngo> ngos = ngoService.findAll();
 			if (ngos == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngoService.getNgos(), "Operation Completed");
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngos, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -71,26 +77,27 @@ public class NgoController {
 	 * If there's no Ngos with the specified ID, then it will return a HTTP error
 	 * code.
 	 * 
+	 * @param id The id to be searched for.
 	 * @return a ResponseEntity Object, which contains the Ngo and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	// @GetMapping("/ngo/{id}")
-	// public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID
-	// id) {
-	// try {
-	// Ngo ngo = ngoService.getNgoById(id);
-	// if (ngo != null) {
-	// DataResponse<Ngo> dataResponse = new DataResponse<>(ngo.get(), "Operation
-	// Completed");
-	// return new ResponseEntity<>(dataResponse, HttpStatus.OK);
-	// } else {
-	// return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	// }
-	// } catch (Exception e) {
-	// return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	// }
-	// }
+	@GetMapping("/ngo/by-id/{id}")
+	public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID id) {
+		try {
+
+			Ngo ngo = ngoService.findById(id);
+
+			if (ngo != null) {
+			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
+			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
+			} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	/**
 	 * Gets and Sends all Ngos based on their Email in the database as a resource to
@@ -98,15 +105,16 @@ public class NgoController {
 	 * If there's no Ngos matching the email specified in the database (null), then
 	 * it will return a HTTP error code.
 	 * 
+	 * @param email The email to be searched for.
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/ngo/{email}")
+	@GetMapping("/ngo/by-email/{email}")
 	public ResponseEntity<DataResponse<Ngo>> getNgoByEmail(@PathVariable("email") String email) {
 		try {
-			Ngo ngo = ngoService.getNgoByEmail(email);
+			Ngo ngo = ngoService.findByEmail(email);
 			if (ngo == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -123,15 +131,16 @@ public class NgoController {
 	 * If there's no Ngos matching the name specified in the database (null), then
 	 * it will return a HTTP error code.
 	 * 
+	 * @param name The name to be searched for.
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
-	@GetMapping("/ngo/{name}")
-	public ResponseEntity<DataResponse<Ngo>> getNgoByName(@PathVariable("name") String name) {
+	@GetMapping("/ngo/by-name/{name}")
+	public ResponseEntity<DataResponse<Ngo>> findNgoByName(@PathVariable("name") String name) {
 		try {
-			Ngo ngo = ngoService.getNgoByName(name);
+			Ngo ngo = ngoService.findByName(name);
 			if (ngo == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -141,26 +150,6 @@ public class NgoController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	@PostMapping("/ngo/request")
-	public DonationRequested addDonationRequest(@RequestBody Map<String, String> data) {
-		DonationRequested donationRequested = donationRequestedService.addDonationRequested(
-				new DonationRequested(data.get("item"), Integer.parseInt(data.get("quantity")),
-						Integer.parseInt(data.get("remaining"))));
-		ngoService.addDonationRequestedById(UUID.fromString(data.get("ngo_id")), donationRequested);
-
-		// donationRequestedService.addDonationRequested(data.get("item"),
-		// Integer.parseInt(data.get("quantity")),
-		// Integer.parseInt(data.get("remaining")));
-
-		return donationRequested;
-	}
-
-	@GetMapping("/ngo/donation_requested/{id}")
-	public Ngo getDonationRequested(@PathVariable("id") UUID id) {
-		Ngo ngo = ngoService.getNgoById(id);
-		ngo.setPassword("");
-		return ngo;
-	}
-
 }
+
+

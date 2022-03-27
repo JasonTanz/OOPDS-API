@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 
 import oopds.assignment.DC.models.DonationRequested;
+import oopds.assignment.DC.models.Ngo;
 
 /**
  * A Data Access Object (DAO) to be used by the Service Classes to access
@@ -17,11 +18,33 @@ import oopds.assignment.DC.models.DonationRequested;
 @Repository
 public interface DonationRequestedDAO extends JpaRepository<DonationRequested, UUID> {
 
-    List<DonationRequested> findByQuantity(int quantity);
+    // List<DonationRequested> findByQuantity(int quantity);
 
+    // public List<DonationRequested> getAllByNgo(Ngo ngo);
+
+    /**
+    * Abstract method to allow the service to search for the Donation Requested based on their Item name
+    * 
+    * @param item The item to be searched for.
+    * @return A List of Donation Requested items based on the name searched for
+    */
     @Query(value = "SELECT d.id, d.item, d.remaining, d.quantity, d.ngo_id FROM donation_requested d WHERE d.item = ?1 AND d.remaining > 0", nativeQuery = true)
-    List<DonationRequested> findByItem(String item);
+    List<DonationRequested> findAllByItem(String item);
 
-    @Query(value = "SELECT d FROM DonationRequested d WHERE d.remaining>0", nativeQuery = true)
-    List<DonationRequested> findByRemaining();
+    /**
+    * Abstract method to allow the service to search for the Donation Requested based on their Remaining Items
+    *
+    * @return A list of Donations Requested Entity if remaining not equals to 0
+    */
+    @Query(value = "SELECT * FROM donation_requested d WHERE d.remaining>0", nativeQuery = true)
+    List<DonationRequested> findAllRemaining();
+
+    /**
+    * Abstract method to allow the service to search for the Donation Requested based on their related Donor ID
+    *
+    * @param id The Donor ID to be searched for
+    * @return A List of Donations Requested Entity based on the Donor ID Passed
+    */
+    @Query(value = "SELECT * FROM donation_requested d where d.ngo_id = ?1 ", nativeQuery = true)
+    public List<DonationRequested> findAllByNgoId(UUID ngoId);
 }

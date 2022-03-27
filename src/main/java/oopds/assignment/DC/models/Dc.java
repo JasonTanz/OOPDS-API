@@ -36,6 +36,7 @@ public class Dc implements UserDetails {
      * automatically generated.
      * 
      * @param name     The name of the Distribution Center.
+     * @param email    The email of the Distribution Center.
      * @param password The password used to login into Distribution Center's
      *                 account.
      */
@@ -112,42 +113,84 @@ public class Dc implements UserDetails {
     public String toString() {
         return "Id: " + id + ", Name: " + name + ", Password: " + password;
     }
-
+    
+    /**
+    * Gets and Returns the email of the Distribution Center. 
+    *
+    * @return The email of the Distribution Center
+    */
     public String getEmail() {
         return this.email;
     }
 
+    /**
+     * Update and changes the Email of the Distribution Center based on parameter
+     * given.
+     * 
+     * @param email The new Email of the Distribution Center.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+    * Gets and Returns the Username of the Distribution Center. 
+    *
+    * @return The Username of the Distribution Center
+    */
     @Override
     public String getUsername() {
         return this.getEmail();
     }
 
+    /**
+    * Gets and Returns the List of Authorities associated with the Distribution Center. 
+    *
+    * @return The List Object of the Authorities associated with the Distribution Center. 
+    */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ngo"));
     }
 
+    /**
+    * Checks and Returns the status of the Expiration of Distribution Center.
+    *
+    * @return true if not expired, false if yes.
+    */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
-
+    
+    /**
+    * Checks and Returns the status of the Locked (On-Hold) of Distribution Center.
+    *
+    * @return true if not locked, false if yes.
+    */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+    * Checks and Returns the status of the Expiration of Distribution Center's Credentials.
+    *
+    * @return true if not expired, false if yes.
+    */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+    * Checks and Returns the status of the account of Distribution Center.
+    *
+    * @return true if enabled, false if no.
+    */
     @Override
     public boolean isEnabled() {
         return true;
     }
+
 }

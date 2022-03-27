@@ -17,9 +17,9 @@ import oopds.assignment.DC.models.DonationDistributed;
 public interface DonationDistributedDAO extends JpaRepository<DonationDistributed, UUID> {
 
     // @Query(value = "Select * from DonationMade dm left")
-    List<DonationDistributed> findAll();
+    // List<DonationDistributed> findAll();
 
-    List<DonationDistributed> findByQuantity(int quantity);
+    // List<DonationDistributed> findByQuantity(int quantity);
 
     // List<DonationDistributed> findByRemaining(int remaining);
 }
