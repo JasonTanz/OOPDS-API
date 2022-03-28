@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DonationRequestedService implements DonationService<DonationRequested> {
-	private DonationRequestedDAO donationRequestedDAO;
+	private final DonationRequestedDAO donationRequestedDAO;
 
 	/**
 	 *  Constructor for the DonationRequestedService class based on the parameters passed

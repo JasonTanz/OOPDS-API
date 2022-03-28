@@ -24,15 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @CrossOrigin
 public class DcController {
-	private DonationMadeService donationMadeService;
-	private DonationRequestedService donationRequestedService;
-
-	// private DonationDistributedDAO donationDistributedDAO;
-	// private donationDistributedService donationDistributedService;
+	private final DonationMadeService donationMadeService;
+	private final DonationRequestedService donationRequestedService;
 
 	/**
 	 * This is a constructor for the DcController controller with the specified
 	 * parameter passed.
+	 
 	 *
 	 * @param donationMadeService      The service class for Donations Made.
 	 * @param donationRequestedService The service class for Donations Requested.

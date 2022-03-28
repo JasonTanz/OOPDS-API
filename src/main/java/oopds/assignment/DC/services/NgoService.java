@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class NgoService {
-	private NgoDAO ngoDAO;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final NgoDAO ngoDAO;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
 	 * The constructor for NgoService class based on the parameters given

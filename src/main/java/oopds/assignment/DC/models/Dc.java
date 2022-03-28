@@ -1,16 +1,12 @@
+
 package oopds.assignment.DC.models;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * A Database Entity that stores details of the Donation Made by the Donors.
@@ -133,63 +129,4 @@ public class Dc {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	// /**
-	//  * Gets and Returns the Username of the Distribution Center.
-	//  *
-	//  * @return The Username of the Distribution Center
-	//  */
-	// @Override
-	// public String getUsername() {
-	// 	return this.getEmail();
-	// }
-
-	// /**
-	//  * Gets and Returns the List of Authorities associated with the Distribution Center.
-	//  *
-	//  * @return The List Object of the Authorities associated with the Distribution Center.
-	//  */
-	// @Override
-	// public Collection<? extends GrantedAuthority> getAuthorities() {
-	// 	return List.of(new SimpleGrantedAuthority("ngo"));
-	// }
-
-	// /**
-	//  * Checks and Returns the status of the Expiration of Distribution Center.
-	//  *
-	//  * @return true if not expired, false if yes.
-	//  */
-	// @Override
-	// public boolean isAccountNonExpired() {
-	// 	return true;
-	// }
-
-	// /**
-	//  * Checks and Returns the status of the Locked (On-Hold) of Distribution Center.
-	//  *
-	//  * @return true if not locked, false if yes.
-	//  */
-	// @Override
-	// public boolean isAccountNonLocked() {
-	// 	return true;
-	// }
-
-	// /**
-	//  * Checks and Returns the status of the Expiration of Distribution Center's Credentials.
-	//  *
-	//  * @return true if not expired, false if yes.
-	//  */
-	// @Override
-	// public boolean isCredentialsNonExpired() {
-	// 	return true;
-	// }
-
-	// /**
-	//  * Checks and Returns the status of the account of Distribution Center.
-	//  *
-	//  * @return true if enabled, false if no.
-	//  */
-	// @Override
-	// public boolean isEnabled() {
-	// 	return true;
-	// }
 }

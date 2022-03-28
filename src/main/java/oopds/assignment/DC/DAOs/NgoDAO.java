@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 public interface NgoDAO extends JpaRepository<Ngo, UUID> {
 	/**
 	 * Abstract method that allows the service to search for the Ngo based on their Emails
+	 
 	 *
 	 * @param email The email to be searched for.
 	 * @return The Ngo entity according to the email passed.

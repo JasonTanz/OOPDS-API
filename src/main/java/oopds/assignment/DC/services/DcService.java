@@ -15,8 +15,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DcService {
-	private DcDAO dcDAO;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	private final DcDAO dcDAO;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
 	 * Constructor for DCService class based on the parameters given.

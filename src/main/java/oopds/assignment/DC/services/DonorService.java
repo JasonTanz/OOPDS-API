@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class DonorService {
 	private final DonorDAO donorDAO;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	/**
 	 * The constructor for DonorService class based on the parameters given
