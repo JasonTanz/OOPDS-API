@@ -109,7 +109,7 @@ public class Donation {
 	 * Update and changes the remaining amount of item in Donation based on
 	 * parameter given.
 	 *
-	 * @param quantity The new remaining amount of item in Donation.
+	 * @param remaining The new remaining amount of item in Donation.
 	 */
 	public void setRemaining(int remaining) {
 		this.remaining = remaining;

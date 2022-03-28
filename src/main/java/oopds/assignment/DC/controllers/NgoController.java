@@ -52,7 +52,6 @@ public class NgoController {
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/ngo")
 	public ResponseEntity<DataResponse<List<Ngo>>> getAllNgos() {
@@ -78,7 +77,6 @@ public class NgoController {
 	 * @param id The id to be searched for.
 	 * @return a ResponseEntity Object, which contains the Ngo and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/ngo/by-id/{id}")
 	public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID id) {
@@ -106,7 +104,6 @@ public class NgoController {
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/ngo/by-email/{email}")
 	public ResponseEntity<DataResponse<Ngo>> getNgoByEmail(
@@ -133,7 +130,6 @@ public class NgoController {
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/ngo/by-name/{name}")
 	public ResponseEntity<DataResponse<Ngo>> findNgoByName(

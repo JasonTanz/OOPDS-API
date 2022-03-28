@@ -55,7 +55,6 @@ public class DonationRequestedController {
 	 * @return a ResponseEntity Object, which contains a List of Donations Requested
 	 *         and the appropriate HTTP Response Code or only a HTTP Response Code
 	 *         to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donationRequested")
 	public ResponseEntity<DataResponse<List<DonationRequested>>> getAllDonationRequested() {
@@ -85,7 +84,6 @@ public class DonationRequestedController {
 	 * @return a ResponseEntity Object, which contains the Donation Requested and
 	 *         the appropriate HTTP Response Code or only a HTTP Response Code to
 	 *         the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donation_requested/{id}")
 	public ResponseEntity<DataResponse<DonationRequested>> getDonationRequestedById(
@@ -117,7 +115,6 @@ public class DonationRequestedController {
 	 * @return a ResponseEntity Object, which contains the Donation Requested List and
 	 *         the appropriate HTTP Response Code or only a HTTP Response Code to
 	 *         the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donation-requested/by-ngoId/{id}")
 	public ResponseEntity<DataResponse<List<DonationRequested>>> getDonationRequestedByNgoId(
@@ -151,7 +148,6 @@ public class DonationRequestedController {
 	 * @return a ResponseEntity Object, which contains list of Donation Requested and
 	 *         the appropriate HTTP Response Code or only a HTTP Response Code to
 	 *         the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donation-requested/by-item/{item}")
 	public List<DonationRequested> getByItem(@PathVariable("item") String item) {
@@ -168,7 +164,6 @@ public class DonationRequestedController {
 	 * @return a ResponseEntity Object, which contains list of Donation Requested and
 	 *         the appropriate HTTP Response Code or only a HTTP Response Code to
 	 *         the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@PostMapping("request_donation")
 	public DonationRequested addDonationRequested(@RequestBody Map<String, String> data) {

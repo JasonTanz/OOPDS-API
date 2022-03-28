@@ -1,6 +1,5 @@
 package oopds.assignment.DC.controllers;
 
-
 import com.auth0.jwt.algorithms.Algorithm;
 import java.util.List;
 import java.util.UUID;
@@ -37,11 +36,11 @@ public class DonorController {
 
 	/**
 	 * Constructor for the donor controller based on the perimeter passed.
-	 * 
+	 *
 	 * @param donorService The service class for the Donor.
 	 * @param bCryptPasswordEncoder The password encoder to encrypt passwords.
 	 * @param donationMadeService The service class for the Donation Made.
-	*/
+	 */
 	@Autowired
 	public DonorController(
 		DonorService donorService,
@@ -60,7 +59,6 @@ public class DonorController {
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor")
 	public ResponseEntity<DataResponse<List<Donor>>> getAllDonors() {
@@ -87,7 +85,6 @@ public class DonorController {
 	 * @param id The id to be searched for.
 	 * @return a ResponseEntity Object, which contains the Donor and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-id/{id}")
 	// @PreAuthorize("hasRole('ROLE_WRITE')")
@@ -118,7 +115,6 @@ public class DonorController {
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-email/{email}")
 	public ResponseEntity<DataResponse<Donor>> getDonorsByEmail(
@@ -145,7 +141,6 @@ public class DonorController {
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-name/{name}")
 	public ResponseEntity<DataResponse<Donor>> getDonorsByName(

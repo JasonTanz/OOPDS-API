@@ -26,7 +26,7 @@ public class DataResponse<T> {
 	/**
 	 * Gets and Returns the Data stored in the DataResponse Object
 	 *
-	 * @return <T> Type of data in DataResponse
+	 * @return Generic Type of data in DataResponse
 	 */
 	public T getData() {
 		return data;

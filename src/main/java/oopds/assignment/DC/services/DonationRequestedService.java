@@ -98,8 +98,9 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	}
 
 	/**
-	 * Gets and Returns the Donations Requested associated with the Ngo Id passed
+	 * Gets and Returns the Donations Requested associated with the Ngo Id passed.
 	 *
+	 * @param id The Ngo Id associated to be searched for.
 	 * @return a List of Donations Requested object based on Remaining Amount of items left.
 	 */
 	public List<DonationRequested> findAllByNgoId(UUID id) {

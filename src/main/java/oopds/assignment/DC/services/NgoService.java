@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
 /**
  * A Service Class to be used by the Spring API to do certain operations based
  * on the method called.
  * This service class contains the operations that involves the Ngo.
  */
+@Service
 public class NgoService {
 	private NgoDAO ngoDAO;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;

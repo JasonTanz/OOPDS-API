@@ -55,8 +55,6 @@ public class DcController {
 	 */
 	@PatchMapping("/dc")
 	public List<DonationMade> updateRemaining(@RequestBody Map<String, String> data) {
-
-		
 		DonationMade donationMade = donationMadeService.findById(
 			UUID.fromString(data.get("donation_made_id"))
 		);

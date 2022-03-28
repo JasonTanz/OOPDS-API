@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DonationRequestedDAO extends JpaRepository<DonationRequested, UUID> {
-
 	/**
 	 * Abstract method to allow the service to search for the Donation Requested based on their Item name
 	 *
@@ -41,7 +40,7 @@ public interface DonationRequestedDAO extends JpaRepository<DonationRequested, U
 	/**
 	 * Abstract method to allow the service to search for the Donation Requested based on their related Donor ID
 	 *
-	 * @param id The Donor ID to be searched for
+	 * @param ngoId The Donor ID to be searched for
 	 * @return A List of Donations Requested Entity based on the Donor ID Passed
 	 */
 	@Query(

@@ -18,10 +18,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 // @EnableJpaRepositories("oopds.assignment.DC.DAOs")
 public class DcApplication {
 
+	/**
+	 * The main method
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DcApplication.class, args);
 	}
 
+	/**
+	 * The method to initialize the Password Encoder that will encrypt the user's password
+	 */
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();

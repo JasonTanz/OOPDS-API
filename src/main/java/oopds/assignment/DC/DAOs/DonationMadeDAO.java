@@ -40,7 +40,7 @@ public interface DonationMadeDAO extends JpaRepository<DonationMade, UUID> {
 	/**
 	 * Abstract method to allow the service to search for the Donation Made based on their related Donor ID
 	 *
-	 * @param id The Donor ID to be searched for
+	 * @param donorId The Donor ID to be searched for
 	 * @return A List of Donations Made Entity based on the Donor ID Passed
 	 */
 	@Query(

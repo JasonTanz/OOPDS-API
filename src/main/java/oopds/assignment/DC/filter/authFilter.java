@@ -19,12 +19,11 @@
 // import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 // /**
-//  * The 
+//  * The
 //  */
 // public class authFilter extends UsernamePasswordAuthenticationFilter {
 // 	private final AuthenticationManager authenticationManager;
 
-	
 // 	@Autowired
 // 	public authFilter(AuthenticationManager authenticationManager) {
 // 		this.authenticationManager = authenticationManager;

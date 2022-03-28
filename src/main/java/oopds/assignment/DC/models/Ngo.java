@@ -1,7 +1,6 @@
 package oopds.assignment.DC.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.Column;

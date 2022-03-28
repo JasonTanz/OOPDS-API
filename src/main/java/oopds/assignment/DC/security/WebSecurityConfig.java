@@ -31,6 +31,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	// @Autowired
 	// private JWTAuthFilter jwtauthfilter;
 
@@ -48,14 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// http.addFilterBefore(jwtauthfilter,
 		// UsernamePasswordAuthenticationFilter.class);
 
-		http
-			.cors()
-			.and()
-			.csrf()
-			.disable()// .authorizeRequests().antMatchers("/api/auth/**").permitAll().anyRequest()
-		// .authenticated().and()
-		// .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		// .addFilterBefore(jwtauthfilter,
+		http.cors().and().csrf().disable()// .addFilterBefore(jwtauthfilter, // .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // .authenticated().and() // .authorizeRequests().antMatchers("/api/auth/**").permitAll().anyRequest()
 		// UsernamePasswordAuthenticationFilter.class);
 		;
 		// http.authorizeHttpRequests().anyRequest().permitAll();

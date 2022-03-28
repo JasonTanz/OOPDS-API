@@ -12,10 +12,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 /**
  * A Database Entity that stores details of the Donation Made by the Donors.
-*/
+ */
 @Entity
 public class Dc {
 	@Id
@@ -134,7 +133,6 @@ public class Dc {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	// /**
 	//  * Gets and Returns the Username of the Distribution Center.
 	//  *

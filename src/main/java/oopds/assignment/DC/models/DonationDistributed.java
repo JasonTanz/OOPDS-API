@@ -23,8 +23,7 @@ public class DonationDistributed {
 	/**
 	 * Constructs a Donation Distributed Entity with all Null values;
 	 */
-	public DonationDistributed() {
-	}
+	public DonationDistributed() {}
 
 	/**
 	 * Constructs a Donation Distributed Entity with specified values.
@@ -106,8 +105,7 @@ class DonationDistributedId implements Serializable {
 	@JoinColumn(name = "donationRequested_id", referencedColumnName = "id")
 	private DonationRequested donationRequested;
 
-	public DonationDistributedId() {
-	}
+	public DonationDistributedId() {}
 
 	/**
 	 * Gets and Returns the Donation Made transaction (Giver)
