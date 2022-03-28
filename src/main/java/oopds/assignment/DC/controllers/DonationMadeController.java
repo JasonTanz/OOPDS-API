@@ -68,11 +68,6 @@ public class DonationMadeController {
 		return donationMade;
 	}
 
-	// public ResponseList<DonationMade> getAll() {
-	// List<DonationMade> donationMade = donationMadeService.findAll();
-	// return donationMade;
-	// }
-
 	/**
 	 * This is a HTTP Get method to get donations made based on the item name.
 	 *

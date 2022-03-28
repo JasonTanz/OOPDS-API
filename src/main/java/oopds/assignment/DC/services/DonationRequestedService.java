@@ -15,6 +15,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DonationRequestedService implements DonationService<DonationRequested> {
+
+
+
+
+
 	private final DonationRequestedDAO donationRequestedDAO;
 
 	/**

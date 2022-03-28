@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @CrossOrigin
 public class DonationRequestedController {
-	private DonationRequestedService donationRequestedService;
-	private NgoService ngoService;
+	private final DonationRequestedService donationRequestedService;
+	private final NgoService ngoService;
 
 	/**
 	 * This is a constructor for the DonationRequestedController controller with the specified parameters

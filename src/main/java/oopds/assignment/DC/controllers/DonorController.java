@@ -1,16 +1,13 @@
 package oopds.assignment.DC.controllers;
 
-import com.auth0.jwt.algorithms.Algorithm;
 import java.util.List;
 import java.util.UUID;
 import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.Donor;
-import oopds.assignment.DC.services.DonationMadeService;
 import oopds.assignment.DC.services.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,29 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @CrossOrigin
 public class DonorController {
-	@Autowired
-	DonorService donorService;
-
-	BCryptPasswordEncoder bCryptPasswordEncoder;
-	Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
-
-	// private final DonationMadeService donationMadeService;
+	private final DonorService donorService;
 
 	/**
 	 * Constructor for the donor controller based on the perimeter passed.
 	 *
 	 * @param donorService The service class for the Donor.
-	 * @param bCryptPasswordEncoder The password encoder to encrypt passwords.
-	 * @param donationMadeService The service class for the Donation Made.
 	 */
 	@Autowired
-	public DonorController(
-		DonorService donorService,
-		BCryptPasswordEncoder bCryptPasswordEncoder,
-		DonationMadeService donationMadeService
-	) {
+	public DonorController(DonorService donorService) {
 		this.donorService = donorService;
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
 	/**

@@ -13,6 +13,24 @@ public class DataResponse<T> {
 	public DataResponse() {}
 
 	/**
+	 * Constructs a DataResponse Object for passing data only (No need message)
+	 *
+	 * @param data The data to be stored in the DataResponse Object
+	 */
+	public DataResponse(T data) {
+		this.data = data;
+	}
+
+	/**
+	 * Constructs a DataResponse Object for passing a message only (Such as errors, that returns no data values)
+	 *
+	 * @param message The String message to be stored in the object.
+	 */
+	public DataResponse(String message) {
+		this.message = message;
+	}
+
+	/**
 	 * Constructs a DataResponse Object with the specified values.
 	 *
 	 * @param data The data to be sent

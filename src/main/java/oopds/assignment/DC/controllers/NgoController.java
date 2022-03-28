@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.Ngo;
-import oopds.assignment.DC.services.DonationRequestedService;
 import oopds.assignment.DC.services.NgoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,24 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class NgoController {
-	@Autowired
-	NgoService ngoService;
-
-	DonationRequestedService donationRequestedService;
+	private final NgoService ngoService;
 
 	/**
 	 * This is a constructor for the NgoController controller with the specified parameters.
 	 *
 	 * @param ngoService The service class for the Ngo.
-	 * @param donationRequestedService The service class for the Donation Requested.S
 	 */
 	@Autowired
-	public NgoController(
-		NgoService ngoService,
-		DonationRequestedService donationRequestedService
-	) {
+	public NgoController(NgoService ngoService) {
 		this.ngoService = ngoService;
-		this.donationRequestedService = donationRequestedService;
 	}
 
 	/**
