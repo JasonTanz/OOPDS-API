@@ -28,7 +28,6 @@
 oopds.assignment.DC.controllers
 oopds.assignment.DC.DAOs
 oopds.assignment.DC
-oopds.assignment.DC.filter
 oopds.assignment.DC.models
 oopds.assignment.DC.security
 oopds.assignment.DC.services
@@ -45,9 +44,6 @@ oopds.assignment.DC.services
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/DonorDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/NgoDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DcApplication.java'
-'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/filter/authFilter.java'
-'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/filter/Bean.java'
-'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/filter/JWTAuthFilter.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/DataResponse.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/Dc.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/Donation.java'
@@ -129,21 +125,20 @@ C:\Users\User\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\2.3.3\jakarta
 C:\Users\User\.m2\repository\jakarta\activation\jakarta.activation-api\1.2.2\jakarta.activation-api-1.2.2.jar = 1646027097992
 E:\GitHub\OOPDS-API\src\main\java = 1646370493540
 E:\GitHub\OOPDS-API\target\generated-sources\annotations = 1646371162871
-E:\GitHub\OOPDS-API\target\apidocs\allclasses-index.html = 1648475880373
-E:\GitHub\OOPDS-API\target\apidocs\allpackages-index.html = 1648475880376
-E:\GitHub\OOPDS-API\target\apidocs\element-list = 1648475879935
-E:\GitHub\OOPDS-API\target\apidocs\help-doc.html = 1648475880434
-E:\GitHub\OOPDS-API\target\apidocs\index-all.html = 1648475880425
-E:\GitHub\OOPDS-API\target\apidocs\index.html = 1648475880338
-E:\GitHub\OOPDS-API\target\apidocs\javadoc.bat = 1648475329271
-E:\GitHub\OOPDS-API\target\apidocs\jquery-ui.overrides.css = 1648475880473
-E:\GitHub\OOPDS-API\target\apidocs\member-search-index.js = 1648475880385
-E:\GitHub\OOPDS-API\target\apidocs\module-search-index.js = 1648475880379
-E:\GitHub\OOPDS-API\target\apidocs\overview-summary.html = 1648475880428
-E:\GitHub\OOPDS-API\target\apidocs\overview-tree.html = 1648475880332
-E:\GitHub\OOPDS-API\target\apidocs\package-search-index.js = 1648475880381
-E:\GitHub\OOPDS-API\target\apidocs\script.js = 1648475880440
-E:\GitHub\OOPDS-API\target\apidocs\search.js = 1648475880446
-E:\GitHub\OOPDS-API\target\apidocs\stylesheet.css = 1648475880438
-E:\GitHub\OOPDS-API\target\apidocs\tag-search-index.js = 1648475880386
-E:\GitHub\OOPDS-API\target\apidocs\type-search-index.js = 1648475880382
+E:\GitHub\OOPDS-API\target\apidocs\allclasses-index.html = 1648485364387
+E:\GitHub\OOPDS-API\target\apidocs\allpackages-index.html = 1648485364390
+E:\GitHub\OOPDS-API\target\apidocs\element-list = 1648485363920
+E:\GitHub\OOPDS-API\target\apidocs\help-doc.html = 1648485364464
+E:\GitHub\OOPDS-API\target\apidocs\index-all.html = 1648485364452
+E:\GitHub\OOPDS-API\target\apidocs\index.html = 1648485364356
+E:\GitHub\OOPDS-API\target\apidocs\jquery-ui.overrides.css = 1648485364547
+E:\GitHub\OOPDS-API\target\apidocs\member-search-index.js = 1648485364399
+E:\GitHub\OOPDS-API\target\apidocs\module-search-index.js = 1648485364393
+E:\GitHub\OOPDS-API\target\apidocs\overview-summary.html = 1648485364456
+E:\GitHub\OOPDS-API\target\apidocs\overview-tree.html = 1648485364349
+E:\GitHub\OOPDS-API\target\apidocs\package-search-index.js = 1648485364395
+E:\GitHub\OOPDS-API\target\apidocs\script.js = 1648485364475
+E:\GitHub\OOPDS-API\target\apidocs\search.js = 1648485364484
+E:\GitHub\OOPDS-API\target\apidocs\stylesheet.css = 1648485364469
+E:\GitHub\OOPDS-API\target\apidocs\tag-search-index.js = 1648485364400
+E:\GitHub\OOPDS-API\target\apidocs\type-search-index.js = 1648485364396
