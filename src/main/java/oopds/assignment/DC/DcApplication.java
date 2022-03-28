@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 /**
-* This is the main Application Class that will start and initialize the web application
-*/
+ * This is the main Application Class that will start and initialize the web application
+ */
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class })
 // @EnableJpaRepositories("oopds.assignment.DC.DAOs")
@@ -27,5 +26,4 @@ public class DcApplication {
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
 }

@@ -1,24 +1,17 @@
 package oopds.assignment.DC.controllers;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
-
 import oopds.assignment.DC.models.DataResponse;
-import oopds.assignment.DC.models.DonationRequested;
 import oopds.assignment.DC.models.Ngo;
 import oopds.assignment.DC.services.DonationRequestedService;
 import oopds.assignment.DC.services.NgoService;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,19 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class NgoController {
-
 	@Autowired
 	NgoService ngoService;
+
 	DonationRequestedService donationRequestedService;
 
 	/**
-	* This is a constructor for the NgoController controller with the specified parameters.
-	*
-	* @param ngoService The service class for the Ngo.
-	* @param donationRequestedService The service class for the Donation Requested.S
-	*/
+	 * This is a constructor for the NgoController controller with the specified parameters.
+	 *
+	 * @param ngoService The service class for the Ngo.
+	 * @param donationRequestedService The service class for the Donation Requested.S
+	 */
 	@Autowired
-	public NgoController(NgoService ngoService, DonationRequestedService donationRequestedService) {
+	public NgoController(
+		NgoService ngoService,
+		DonationRequestedService donationRequestedService
+	) {
 		this.ngoService = ngoService;
 		this.donationRequestedService = donationRequestedService;
 	}
@@ -52,7 +48,7 @@ public class NgoController {
 	 * Gets and Sends all Ngos available in the database as a resource to the web.
 	 * If there's no Ngos in the database (null), then it will return a HTTP error
 	 * code.
-	 * 
+	 *
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
@@ -62,10 +58,12 @@ public class NgoController {
 	public ResponseEntity<DataResponse<List<Ngo>>> getAllNgos() {
 		try {
 			List<Ngo> ngos = ngoService.findAll();
-			if (ngos == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			if (ngos == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngos, "Operation Completed");
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(
+				ngos,
+				"Operation Completed"
+			);
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,7 +74,7 @@ public class NgoController {
 	 * Gets and Sends the Ngos in the database based on ID as a resource to the web.
 	 * If there's no Ngos with the specified ID, then it will return a HTTP error
 	 * code.
-	 * 
+	 *
 	 * @param id The id to be searched for.
 	 * @return a ResponseEntity Object, which contains the Ngo and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
@@ -85,14 +83,13 @@ public class NgoController {
 	@GetMapping("/ngo/by-id/{id}")
 	public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID id) {
 		try {
-
 			Ngo ngo = ngoService.findById(id);
 
 			if (ngo != null) {
-			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
-			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
+				DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
+				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 			} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -104,7 +101,7 @@ public class NgoController {
 	 * the web.
 	 * If there's no Ngos matching the email specified in the database (null), then
 	 * it will return a HTTP error code.
-	 * 
+	 *
 	 * @param email The email to be searched for.
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
@@ -112,11 +109,12 @@ public class NgoController {
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/ngo/by-email/{email}")
-	public ResponseEntity<DataResponse<Ngo>> getNgoByEmail(@PathVariable("email") String email) {
+	public ResponseEntity<DataResponse<Ngo>> getNgoByEmail(
+		@PathVariable("email") String email
+	) {
 		try {
 			Ngo ngo = ngoService.findByEmail(email);
-			if (ngo == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			if (ngo == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
@@ -130,7 +128,7 @@ public class NgoController {
 	 * the web.
 	 * If there's no Ngos matching the name specified in the database (null), then
 	 * it will return a HTTP error code.
-	 * 
+	 *
 	 * @param name The name to be searched for.
 	 * @return a ResponseEntity Object, which contains a List of Ngos and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
@@ -138,11 +136,12 @@ public class NgoController {
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/ngo/by-name/{name}")
-	public ResponseEntity<DataResponse<Ngo>> findNgoByName(@PathVariable("name") String name) {
+	public ResponseEntity<DataResponse<Ngo>> findNgoByName(
+		@PathVariable("name") String name
+	) {
 		try {
 			Ngo ngo = ngoService.findByName(name);
-			if (ngo == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			if (ngo == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
@@ -151,5 +150,3 @@ public class NgoController {
 		}
 	}
 }
-
-

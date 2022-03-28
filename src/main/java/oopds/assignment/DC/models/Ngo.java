@@ -1,23 +1,16 @@
 package oopds.assignment.DC.models;
 
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Database Entity that stores Ngo's data values to be used for the Spring
@@ -45,13 +38,12 @@ public class Ngo {
 	/**
 	 * Constructs a Ngo Entity with all null values.
 	 */
-	public Ngo() {
-	}
+	public Ngo() {}
 
 	/**
 	 * Constructs a Ngo Entity with the specified values. Id is automatically
 	 * generated.
-	 * 
+	 *
 	 * @param name     The name of the Ngo
 	 * @param password The password used to login into Ngo's account.
 	 * @param manpower The amount of manpower available for the Ngo
@@ -66,7 +58,7 @@ public class Ngo {
 
 	/**
 	 * Gets and Returns the ID of the Ngo.
-	 * 
+	 *
 	 * @return A UUID-type ID of the Ngo.
 	 */
 	public UUID getId() {
@@ -75,7 +67,7 @@ public class Ngo {
 
 	/**
 	 * Update and changes the ID of the Ngo based on parameter given.
-	 * 
+	 *
 	 * @param id The new id of the Ngo.
 	 */
 	public void setId(UUID id) {
@@ -84,7 +76,7 @@ public class Ngo {
 
 	/**
 	 * Gets and Returns the name of the Ngo.
-	 * 
+	 *
 	 * @return a String value, storing the name of the Ngo.
 	 */
 	public String getName() {
@@ -93,7 +85,7 @@ public class Ngo {
 
 	/**
 	 * Update and changes the Name of the Ngo based on parameter given.
-	 * 
+	 *
 	 * @param name The new name of the Ngo.
 	 */
 	public void setName(String name) {
@@ -102,7 +94,7 @@ public class Ngo {
 
 	/**
 	 * Gets and Returns the password of the Ngo.
-	 * 
+	 *
 	 * @return a String value, storing the password of the Ngo.
 	 */
 	public String getPassword() {
@@ -111,7 +103,7 @@ public class Ngo {
 
 	/**
 	 * Update and changes the Password of the Ngo based on parameter given.
-	 * 
+	 *
 	 * @param password The new password of the Ngo.
 	 */
 	public void setPassword(String password) {
@@ -120,7 +112,7 @@ public class Ngo {
 
 	/**
 	 * Gets and Returns the available manpower of the Ngo.
-	 * 
+	 *
 	 * @return an integer value, storing the available manpower of the Ngo.
 	 */
 	public int getManpower() {
@@ -130,7 +122,7 @@ public class Ngo {
 	/**
 	 * Update and changes the Available Manpower of the Ngo based on parameter
 	 * given.
-	 * 
+	 *
 	 * @param manpower The new amount of manpower available for the Ngo.
 	 */
 	public void setManpower(int manpower) {
@@ -139,7 +131,7 @@ public class Ngo {
 
 	/**
 	 * Gets and Returns the email of the Ngo.
-	 * 
+	 *
 	 * @return a String value, storing the email of the Ngo.
 	 */
 	public String getEmail() {
@@ -148,7 +140,7 @@ public class Ngo {
 
 	/**
 	 * Update and changes the Email of the Ngo based on parameter given.
-	 * 
+	 *
 	 * @param email The new email of the Ngo.
 	 */
 	public void setEmail(String email) {
@@ -157,7 +149,7 @@ public class Ngo {
 
 	/**
 	 * Gets and Returns the List of Donation Requested by the Ngo.
-	 * 
+	 *
 	 * @return a List object, storing multiple Donation Requested by the Ngo.
 	 */
 	public List<DonationRequested> getDonationRequested() {
@@ -167,7 +159,7 @@ public class Ngo {
 	/**
 	 * Update and changes the List of Donation Requested with a new List of Donation
 	 * Requested.
-	 * 
+	 *
 	 * @param donationRequested the new List of Donation Requested by the Ngo.
 	 */
 	public void setDonationRequested(List<DonationRequested> donationRequested) {
@@ -176,12 +168,20 @@ public class Ngo {
 
 	/**
 	 * Returns a string representation of all values of the Ngo class.
-	 * 
+	 *
 	 * @return a String representation of the Ngo.
 	 */
 	@Override
 	public String toString() {
-		return "Id: " + id + ", Name: " + name + ", Password: " + password + ", Manpower: " + manpower;
+		return (
+			"Id: " +
+			id +
+			", Name: " +
+			name +
+			", Password: " +
+			password +
+			", Manpower: " +
+			manpower
+		);
 	}
-
 }

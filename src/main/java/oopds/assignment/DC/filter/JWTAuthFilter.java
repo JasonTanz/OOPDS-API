@@ -1,55 +1,56 @@
-package oopds.assignment.DC.filter;
+// package oopds.assignment.DC.filter;
 
-import java.io.IOException;
-import java.util.ArrayList;
+// import com.auth0.jwt.JWT;
+// import com.auth0.jwt.algorithms.Algorithm;
+// import java.io.IOException;
+// import java.util.ArrayList;
+// import javax.servlet.FilterChain;
+// import javax.servlet.ServletException;
+// import javax.servlet.http.HttpServletRequest;
+// import javax.servlet.http.HttpServletResponse;
+// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+// import org.springframework.security.core.context.SecurityContextHolder;
+// import org.springframework.stereotype.Component;
+// import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+// @Component
+// public class JWTAuthFilter extends OncePerRequestFilter {
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
+// 	@Override
+// 	protected void doFilterInternal(
+// 		HttpServletRequest req,
+// 		HttpServletResponse res,
+// 		FilterChain chain
+// 	)
+// 		throws IOException, ServletException {
+// 		System.out.println("I'm here");
+// 		String header = req.getHeader("Authorization");
 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+// 		if (header == null || !header.startsWith("Bearer")) {
+// 			chain.doFilter(req, res);
+// 			return;
+// 		}
 
-@Component
-public class JWTAuthFilter extends OncePerRequestFilter {
+// 		UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+// 		SecurityContextHolder.getContext().setAuthentication(authentication);
+// 		chain.doFilter(req, res);
+// 	}
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
-            throws IOException, ServletException {
-        System.out.println("I'm here");
-        String header = req.getHeader("Authorization");
+// 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest req) {
+// 		String token = req.getHeader("Authorization");
 
-        if (header == null || !header.startsWith("Bearer")) {
-            chain.doFilter(req, res);
-            return;
-        }
+// 		if (token != null) {
+// 			String user = JWT
+// 				.require(Algorithm.HMAC256("secret".getBytes()))
+// 				.build()
+// 				.verify(token.replace("Bearer", ""))
+// 				.getSubject();
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
-    }
-
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest req) {
-        String token = req.getHeader("Authorization");
-
-        if (token != null) {
-            String user = JWT.require(Algorithm.HMAC256("secret".getBytes()))
-                    .build()
-                    .verify(token.replace("Bearer", ""))
-                    .getSubject();
-
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-            }
-            return null;
-        }
-        return null;
-
-    }
-}
+// 			if (user != null) {
+// 				return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+// 			}
+// 			return null;
+// 		}
+// 		return null;
+// 	}
+// }

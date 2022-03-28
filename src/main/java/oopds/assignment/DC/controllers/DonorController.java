@@ -1,32 +1,20 @@
 package oopds.assignment.DC.controllers;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
 
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import java.util.List;
+import java.util.UUID;
 import oopds.assignment.DC.models.DataResponse;
-import oopds.assignment.DC.models.DonationMade;
 import oopds.assignment.DC.models.Donor;
 import oopds.assignment.DC.services.DonationMadeService;
 import oopds.assignment.DC.services.DonorService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,18 +26,28 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin
-
 public class DonorController {
-
 	@Autowired
 	DonorService donorService;
+
 	BCryptPasswordEncoder bCryptPasswordEncoder;
 	Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
+
 	// private final DonationMadeService donationMadeService;
 
+	/**
+	 * Constructor for the donor controller based on the perimeter passed.
+	 * 
+	 * @param donorService The service class for the Donor.
+	 * @param bCryptPasswordEncoder The password encoder to encrypt passwords.
+	 * @param donationMadeService The service class for the Donation Made.
+	*/
 	@Autowired
-	public DonorController(DonorService donorService, BCryptPasswordEncoder bCryptPasswordEncoder,
-			DonationMadeService donationMadeService) {
+	public DonorController(
+		DonorService donorService,
+		BCryptPasswordEncoder bCryptPasswordEncoder,
+		DonationMadeService donationMadeService
+	) {
 		this.donorService = donorService;
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
@@ -58,7 +56,7 @@ public class DonorController {
 	 * Gets and Sends all Donors available in the database as a resource to the web.
 	 * If there's no Donors in the database (null), then it will return a HTTP error
 	 * code.
-	 * 
+	 *
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
 	 *         web.
@@ -68,10 +66,12 @@ public class DonorController {
 	public ResponseEntity<DataResponse<List<Donor>>> getAllDonors() {
 		try {
 			List<Donor> list = donorService.findAll();
-			if (list == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			if (list == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-			DataResponse<List<Donor>> dataResponse = new DataResponse<>(list, "Operation Completed");
+			DataResponse<List<Donor>> dataResponse = new DataResponse<>(
+				list,
+				"Operation Completed"
+			);
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -83,7 +83,7 @@ public class DonorController {
 	 * web.
 	 * If there's no Donors with the specified ID, then it will return a HTTP error
 	 * code.
-	 * 
+	 *
 	 * @param id The id to be searched for.
 	 * @return a ResponseEntity Object, which contains the Donor and the appropriate
 	 *         HTTP Response Code or only a HTTP Response Code to the web.
@@ -95,7 +95,10 @@ public class DonorController {
 		try {
 			Donor donor = donorService.findById(id);
 			if (donor != null) {
-				DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
+				DataResponse<Donor> dataResponse = new DataResponse<>(
+					donor,
+					"Operation Completed"
+				);
 				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -110,7 +113,7 @@ public class DonorController {
 	 * to the web.
 	 * If there's no Donors matching the email specified in the database (null),
 	 * then it will return a HTTP error code.
-	 * 
+	 *
 	 * @param email The email to be searched for.
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
@@ -118,11 +121,12 @@ public class DonorController {
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-email/{email}")
-	public ResponseEntity<DataResponse<Donor>> getDonorsByEmail(@PathVariable("email") String email) {
+	public ResponseEntity<DataResponse<Donor>> getDonorsByEmail(
+		@PathVariable("email") String email
+	) {
 		try {
 			Donor donor = donorService.findByEmail(email);
-			if (donor == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			if (donor == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
 			DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
@@ -136,7 +140,7 @@ public class DonorController {
 	 * to the web.
 	 * If there's no Donors matching the name specified in the database (null), then
 	 * it will return a HTTP error code.
-	 * 
+	 *
 	 * @param name The name to be searched for
 	 * @return a ResponseEntity Object, which contains a List of Donors and the
 	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
@@ -144,13 +148,16 @@ public class DonorController {
 	 * @throws Exception Any exceptions in operation will return a HTTP error code.
 	 */
 	@GetMapping("/donor/by-name/{name}")
-	public ResponseEntity<DataResponse<Donor>> getDonorsByName(@PathVariable("name") String name) {
+	public ResponseEntity<DataResponse<Donor>> getDonorsByName(
+		@PathVariable("name") String name
+	) {
 		try {
 			Donor donor = donorService.findByName(name);
-			if (donor == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			else {
-				DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
+			if (donor == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT); else {
+				DataResponse<Donor> dataResponse = new DataResponse<>(
+					donor,
+					"Operation Completed"
+				);
 				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 			}
 		} catch (Exception e) {

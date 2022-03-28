@@ -28,7 +28,7 @@ public class DonationDistributed {
 
 	/**
 	 * Constructs a Donation Distributed Entity with specified values.
-	 * 
+	 *
 	 * @param id       The id of Donation Distributed.
 	 * @param quantity The amount of item transacted.
 	 */
@@ -39,7 +39,7 @@ public class DonationDistributed {
 
 	/**
 	 * Gets and Returns the ID of the Donation Distributed.
-	 * 
+	 *
 	 * @return The ID of the Donation Distributed Entity
 	 */
 	public DonationDistributedId getId() {
@@ -49,7 +49,7 @@ public class DonationDistributed {
 	/**
 	 * Update and changes the ID of the Donation Distributed based on parameter
 	 * given.
-	 * 
+	 *
 	 * @param id The new id for the Donation Distributed Entity
 	 */
 	public void setId(DonationDistributedId id) {
@@ -59,7 +59,7 @@ public class DonationDistributed {
 	/**
 	 * Gets and Returns the amount of item transacted in the Donation Distributed
 	 * Entity.
-	 * 
+	 *
 	 * @return An Integer value, storing the amount of item transacted in the
 	 *         donation Distributed Entity.
 	 */
@@ -70,7 +70,7 @@ public class DonationDistributed {
 	/**
 	 * Update and changes the amount of item transacted in the Donation Distributed
 	 * based on parameter given.
-	 * 
+	 *
 	 * @param quantity The new amount of item transacted for the Donation
 	 *                 Distributed Entity
 	 */
@@ -81,14 +81,13 @@ public class DonationDistributed {
 	/**
 	 * Returns a string representation of all values of the Donation Distributed
 	 * class.
-	 * 
+	 *
 	 * @return a String representation of the Donation Distributed.
 	 */
 	@Override
 	public String toString() {
 		return "Id: " + id + ", Quantity: " + quantity;
 	}
-
 }
 
 /**
@@ -112,7 +111,7 @@ class DonationDistributedId implements Serializable {
 
 	/**
 	 * Gets and Returns the Donation Made transaction (Giver)
-	 * 
+	 *
 	 * @return a Donation Made Transaction
 	 */
 	public DonationMade getDonationMade() {
@@ -121,7 +120,7 @@ class DonationDistributedId implements Serializable {
 
 	/**
 	 * Sets the new Donation Made based on parameter given
-	 * 
+	 *
 	 * @param donationMade The new Donation Made Transaction
 	 */
 	public void setDonationMade(DonationMade donationMade) {
@@ -130,7 +129,7 @@ class DonationDistributedId implements Serializable {
 
 	/**
 	 * Gets and Returns the Donation Requested Transaction (Receiver)
-	 * 
+	 *
 	 * @return a Donation Requested Transaction
 	 */
 	public DonationRequested getDonationRequested_id() {
@@ -139,11 +138,10 @@ class DonationDistributedId implements Serializable {
 
 	/**
 	 * Sets the new Donation Requested based on parameter given
-	 * 
+	 *
 	 * @param donationRequested The new Donation Requested Transaction
 	 */
 	public void setDonationRequested_id(DonationRequested donationRequested) {
 		this.donationRequested = donationRequested;
 	}
-
 }

@@ -1,5 +1,4 @@
-package oopds.assignment.DC.filter;
+// package oopds.assignment.DC.filter;
 
-public @interface Bean {
-
-}
+// public @interface Bean {
+// }
