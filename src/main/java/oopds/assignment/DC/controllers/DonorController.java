@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 
 public class DonorController {
-	
+
 	@Autowired
 	DonorService donorService;
 	BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -149,7 +149,7 @@ public class DonorController {
 			Donor donor = donorService.findByName(name);
 			if (donor == null)
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			else{
+			else {
 				DataResponse<Donor> dataResponse = new DataResponse<>(donor, "Operation Completed");
 				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 			}
@@ -157,25 +157,4 @@ public class DonorController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	// @PostMapping("/donor/donate")
-	// // @PreAuthorize("hasRole('ROLE_WRITE')")
-	// public DonationMade addDonationMade(@RequestBody Map<String, String> json) {
-
-	// 	System.out.println(json.get("donor_id"));
-	// 	DonationMade donationMade = donationMadeService
-	// 			.add(new DonationMade(json.get("item"), Integer.parseInt(json.get("quantity")),
-	// 					Integer.parseInt(json.get("remaining"))));
-
-	// 	// donorService.addDonationMadeById(UUID.fromString(json.get("donor_id")), donationMade);
-	// 	return donationMade;
-	// }
-
-	// @GetMapping("/donor/donation_made/{id}")
-	// public Donor getDonationMade(@PathVariable("id") UUID id) {
-	// 	Donor donor = donorService.getById(id);
-	// 	donor.setPassword("");
-	// 	return donor;
-	// };
-
 }
