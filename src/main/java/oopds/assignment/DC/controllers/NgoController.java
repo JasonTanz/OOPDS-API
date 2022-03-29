@@ -1,47 +1,59 @@
 package oopds.assignment.DC.controllers;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-
-import oopds.assignment.DC.DAOs.NgoDAO;
 import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.Ngo;
 import oopds.assignment.DC.services.NgoService;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * A Controller is a Class that controls the operations of the web service by creating a REST API.
+ * A Controller is a Class that controls the operations of the web service by
+ * creating a REST API.
  * This Controller is responsible for Controlling operations for Ngo Entities.
  */
+@CrossOrigin
 @RestController
-@RequestMapping("/dc")
+@RequestMapping("/api")
 public class NgoController {
+	private final NgoService ngoService;
 
-	NgoService ngoService;
-	NgoDAO ngoDAO;
+	/**
+	 * This is a constructor for the NgoController controller with the specified parameters.
+	 *
+	 * @param ngoService The service class for the Ngo.
+	 */
+	@Autowired
+	public NgoController(NgoService ngoService) {
+		this.ngoService = ngoService;
+	}
 
 	/**
 	 * Gets and Sends all Ngos available in the database as a resource to the web.
-	 * If there's no Ngos in the database (null), then it will return a HTTP error code.
-	 * 
-	 * @return a ResponseEntity Object, which contains a List of Ngos and the appropriate HTTP Response Code or only a HTTP Response Code to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
+	 * If there's no Ngos in the database (null), then it will return a HTTP error
+	 * code.
+	 *
+	 * @return a ResponseEntity Object, which contains a List of Ngos and the
+	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
+	 *         web.
 	 */
 	@GetMapping("/ngo")
-	public ResponseEntity< DataResponse<List<Ngo>> > getAllNgos() {
+	public ResponseEntity<DataResponse<List<Ngo>>> getAllNgos() {
 		try {
-			List<Ngo> ngos = ngoService.getNgos();
-			if (ngos == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-				
-			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngoService.getNgos(), "Operation Completed");
+			List<Ngo> ngos = ngoService.findAll();
+			if (ngos == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(
+				ngos,
+				"Operation Completed"
+			);
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,20 +62,22 @@ public class NgoController {
 
 	/**
 	 * Gets and Sends the Ngos in the database based on ID as a resource to the web.
-	 * If there's no Ngos with the specified ID, then it will return a HTTP error code.
-	 * 
-	 * @return a ResponseEntity Object, which contains the Ngo and the appropriate HTTP Response Code or only a HTTP Response Code to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
+	 * If there's no Ngos with the specified ID, then it will return a HTTP error
+	 * code.
+	 *
+	 * @param id The id to be searched for.
+	 * @return a ResponseEntity Object, which contains the Ngo and the appropriate
+	 *         HTTP Response Code or only a HTTP Response Code to the web.
 	 */
-	@GetMapping("/ngo/{id}")
-	public ResponseEntity< DataResponse<Ngo> > getNgoById(@PathVariable("id") UUID id) {
+	@GetMapping("/ngo/by-id/{id}")
+	public ResponseEntity<DataResponse<Ngo>> getNgoById(@PathVariable("id") UUID id) {
 		try {
-			Optional<Ngo> ngo = ngoService.getNgosById(id);
-			if (ngo.isPresent()){
-				DataResponse<Ngo> dataResponse = new DataResponse<>(ngo.get(), "Operation Completed");
+			Ngo ngo = ngoService.findById(id);
+
+			if (ngo != null) {
+				DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 				return new ResponseEntity<>(dataResponse, HttpStatus.OK);
-			}
-			else{
+			} else {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 		} catch (Exception e) {
@@ -72,20 +86,25 @@ public class NgoController {
 	}
 
 	/**
-	 * Gets and Sends all Ngos based on their Email in the database as a resource to the web.
-	 * If there's no Ngos matching the email specified in the database (null), then it will return a HTTP error code.
-	 * 
-	 * @return a ResponseEntity Object, which contains a List of Ngos and the appropriate HTTP Response Code or only a HTTP Response Code to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
+	 * Gets and Sends all Ngos based on their Email in the database as a resource to
+	 * the web.
+	 * If there's no Ngos matching the email specified in the database (null), then
+	 * it will return a HTTP error code.
+	 *
+	 * @param email The email to be searched for.
+	 * @return a ResponseEntity Object, which contains a List of Ngos and the
+	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
+	 *         web.
 	 */
-	@GetMapping("/ngo/{email}")
-	public ResponseEntity< DataResponse<List<Ngo>> > getNgoByEmail(@PathVariable("email") String email){
+	@GetMapping("/ngo/by-email/{email}")
+	public ResponseEntity<DataResponse<Ngo>> getNgoByEmail(
+		@PathVariable("email") String email
+	) {
 		try {
-			List<Ngo> ngos = ngoService.getNgosByEmail(email);
-			if (ngos == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			
-			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngos, "Operation Completed");
+			Ngo ngo = ngoService.findByEmail(email);
+			if (ngo == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -93,24 +112,28 @@ public class NgoController {
 	}
 
 	/**
-	 * Gets and Sends all Ngos based on their Name in the database as a resource to the web.
-	 * If there's no Ngos matching the name specified in the database (null), then it will return a HTTP error code.
-	 * 
-	 * @return a ResponseEntity Object, which contains a List of Ngos and the appropriate HTTP Response Code or only a HTTP Response Code to the web.
-	 * @throws Exception Any exceptions in operation will return a HTTP error code.
+	 * Gets and Sends all Ngos based on their Name in the database as a resource to
+	 * the web.
+	 * If there's no Ngos matching the name specified in the database (null), then
+	 * it will return a HTTP error code.
+	 *
+	 * @param name The name to be searched for.
+	 * @return a ResponseEntity Object, which contains a List of Ngos and the
+	 *         appropriate HTTP Response Code or only a HTTP Response Code to the
+	 *         web.
 	 */
-	@GetMapping("/ngo/{name}")
-	public ResponseEntity< DataResponse<List<Ngo>> > getNgoByName(@PathVariable("name") String name){
+	@GetMapping("/ngo/by-name/{name}")
+	public ResponseEntity<DataResponse<Ngo>> findNgoByName(
+		@PathVariable("name") String name
+	) {
 		try {
-			List<Ngo> ngos = ngoService.getNgosByName(name);
-			if (ngos == null)
-				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-			
-			DataResponse<List<Ngo>> dataResponse = new DataResponse<>(ngos, "Operation Completed");
+			Ngo ngo = ngoService.findByName(name);
+			if (ngo == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+			DataResponse<Ngo> dataResponse = new DataResponse<>(ngo, "Operation Completed");
 			return new ResponseEntity<>(dataResponse, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 }

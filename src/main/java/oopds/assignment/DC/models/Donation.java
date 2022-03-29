@@ -1,10 +1,11 @@
 package oopds.assignment.DC.models;
 
 import java.util.UUID;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * A Superclass Entity in a database that acts as a template for other classes.
@@ -12,7 +13,9 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Donation {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "id", nullable = false)
 	private UUID id;
 
 	private String item;
@@ -25,10 +28,11 @@ public class Donation {
 	public Donation() {}
 
 	/**
-	 * Constructs a Donation Entity with specified values. Id is automatically generated.
-	 * 
-	 * @param item The item name.
-	 * @param quantity The total amount of item.
+	 * Constructs a Donation Entity with specified values. Id is automatically
+	 * generated.
+	 *
+	 * @param item      The item name.
+	 * @param quantity  The total amount of item.
 	 * @param remaining The remaining amount of item.
 	 */
 	public Donation(String item, int quantity, int remaining) {
@@ -39,7 +43,7 @@ public class Donation {
 
 	/**
 	 * Gets and Returns the ID of the Donation.
-	 * 
+	 *
 	 * @return A UUID-type ID of the Donation.
 	 */
 	public UUID getId() {
@@ -48,7 +52,7 @@ public class Donation {
 
 	/**
 	 * Update and changes the ID of the Donation based on parameter given.
-	 * 
+	 *
 	 * @param id The new id of the Donation.
 	 */
 	public void setId(UUID id) {
@@ -57,7 +61,7 @@ public class Donation {
 
 	/**
 	 * Gets and Returns the Name of the Item.
-	 * 
+	 *
 	 * @return a String value, storing the name of the Item.
 	 */
 	public String getItem() {
@@ -66,7 +70,7 @@ public class Donation {
 
 	/**
 	 * Update and changes the Name of the Item in Donation based on parameter given.
-	 * 
+	 *
 	 * @param item The new name of the item in Donation.
 	 */
 	public void setItem(String item) {
@@ -75,7 +79,7 @@ public class Donation {
 
 	/**
 	 * Gets and Returns the total amount of item in Donation.
-	 * 
+	 *
 	 * @return an Integer value, storing the total amount of item in Donation.
 	 */
 	public int getQuantity() {
@@ -83,17 +87,18 @@ public class Donation {
 	}
 
 	/**
-	 * Update and changes the total amount of item in Donation based on parameter given.
-	 * 
+	 * Update and changes the total amount of item in Donation based on parameter
+	 * given.
+	 *
 	 * @param quantity The new total amount of item in Donation.
 	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
 	/**
 	 * Gets and Returns the remaining amount of item in Donation.
-	 * 
+	 *
 	 * @return an Integer value, storing the remaining amount of item in Donation.
 	 */
 	public int getRemaining() {
@@ -101,9 +106,10 @@ public class Donation {
 	}
 
 	/**
-	 * Update and changes the remaining amount of item in Donation based on parameter given.
-	 * 
-	 * @param quantity The new remaining amount of item in Donation.
+	 * Update and changes the remaining amount of item in Donation based on
+	 * parameter given.
+	 *
+	 * @param remaining The new remaining amount of item in Donation.
 	 */
 	public void setRemaining(int remaining) {
 		this.remaining = remaining;
@@ -111,11 +117,20 @@ public class Donation {
 
 	/**
 	 * Returns a string representation of all values of the Donation class.
-	 * 
+	 *
 	 * @return a String representation of the Donation.
 	 */
 	@Override
-	public String toString(){
-		return "Id: " + id + ", Item: " + item + ", Quantity: " + quantity + ", Remaining: " + remaining;
+	public String toString() {
+		return (
+			"Id: " +
+			id +
+			", Item: " +
+			item +
+			", Quantity: " +
+			quantity +
+			", Remaining: " +
+			remaining
+		);
 	}
 }
