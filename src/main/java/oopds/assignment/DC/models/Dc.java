@@ -26,7 +26,8 @@ public class Dc {
 	/**
 	 * Constructs a Distribution Center Entity with all null values.
 	 */
-	public Dc() {}
+	public Dc() {
+	}
 
 	/**
 	 * Constructs a Distribution Center Entity with specified values. Id is
@@ -130,5 +131,3 @@ public class Dc {
 		this.email = email;
 	}
 }
-
-	
