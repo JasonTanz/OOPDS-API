@@ -18,14 +18,11 @@ public class DonationMade extends Donation {
 	@JsonIgnoreProperties({ "donationMade", "password" })
 	private Donor donor;
 
-	@Column
-	@ElementCollection(targetClass = String.class)
-	private List<String> ngoName;
-
 	/**
 	 * Constructs a Donation Made Entity with all null values.
 	 */
-	public DonationMade() {}
+	public DonationMade() {
+	}
 
 	/**
 	 * Constructs a Donation Made Entity with specified values. Id is automatically
@@ -41,25 +38,6 @@ public class DonationMade extends Donation {
 	}
 
 	/**
-	 * Gets and Returns the Ngo Name that associates with Donation Made
-	 *
-	 * @return a List of Ngo names related to this Donation Made
-	 */
-	public List<String> getNgoName() {
-		return this.ngoName;
-	}
-
-	/**
-	 * Updates and changes the Ngo Name associated with Donation Made based on parameter
-	 * given.
-	 *
-	 * @param ngoName The new list of ngo name associated with donation made
-	 */
-	public void setNgoName(List<String> ngoName) {
-		this.ngoName = ngoName;
-	}
-
-	/**
 	 * Gets and Returns the Donor that associates with Donation Made based on
 	 * parameters given.
 	 *
@@ -70,7 +48,8 @@ public class DonationMade extends Donation {
 	}
 
 	/**
-	 * Updates and changes the Donor associated with Donation Made based on parameter
+	 * Updates and changes the Donor associated with Donation Made based on
+	 * parameter
 	 * given.
 	 *
 	 * @param donor The new donor associated with donation made

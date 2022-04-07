@@ -1,6 +1,8 @@
 package oopds.assignment.DC.models;
 
 import java.io.Serializable;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -35,8 +37,8 @@ public class DonationDistributed {
 	 * @param id       The id of Donation Distributed.
 	 * @param quantity The amount of item transacted.
 	 */
-	public DonationDistributed(DonationDistributedId id, int quantity) {
-		this.id = id;
+	public DonationDistributed(DonationMade donationMade, DonationRequested donationRequested, int quantity) {
+		this.id = new DonationDistributedId(donationMade, donationRequested);
 		this.quantity = quantity;
 	}
 
@@ -118,6 +120,11 @@ class DonationDistributedId implements Serializable {
 	private DonationRequested donationRequested;
 
 	public DonationDistributedId() {
+	}
+
+	public DonationDistributedId(DonationMade donationMade, DonationRequested donationRequested) {
+		this.donationMade = donationMade;
+		this.donationRequested = donationRequested;
 	}
 
 	/**

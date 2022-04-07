@@ -20,4 +20,9 @@ public class DonationDistributedService {
     public List<DonationDistributed> findAll() {
         return donationDistributedDAO.findAll();
     }
+
+    public List<DonationDistributed> save(DonationDistributed donationDistributed) {
+        donationDistributedDAO.save(donationDistributed);
+        return donationDistributedDAO.findAll();
+    }
 }
