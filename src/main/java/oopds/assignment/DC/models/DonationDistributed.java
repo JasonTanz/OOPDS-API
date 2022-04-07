@@ -20,10 +20,14 @@ public class DonationDistributed {
 	@Column
 	private int quantity;
 
+	@Column
+	private String status;
+
 	/**
 	 * Constructs a Donation Distributed Entity with all Null values;
 	 */
-	public DonationDistributed() {}
+	public DonationDistributed() {
+	}
 
 	/**
 	 * Constructs a Donation Distributed Entity with specified values.
@@ -77,6 +81,14 @@ public class DonationDistributed {
 		this.quantity = quantity;
 	}
 
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	/**
 	 * Returns a string representation of all values of the Donation Distributed
 	 * class.
@@ -105,7 +117,8 @@ class DonationDistributedId implements Serializable {
 	@JoinColumn(name = "donationRequested_id", referencedColumnName = "id")
 	private DonationRequested donationRequested;
 
-	public DonationDistributedId() {}
+	public DonationDistributedId() {
+	}
 
 	/**
 	 * Gets and Returns the Donation Made transaction (Giver)

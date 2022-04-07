@@ -1,5 +1,6 @@
 package oopds.assignment.DC.DAOs;
 
+import java.util.List;
 import java.util.UUID;
 import oopds.assignment.DC.models.DonationDistributed;
 import org.springframework.data.jpa.repository.JpaRepository;
