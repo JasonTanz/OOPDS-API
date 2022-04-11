@@ -13,6 +13,7 @@ import oopds.assignment.DC.services.DonationRequestedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,17 +68,19 @@ public class DcController {
 		donationRequested.setRemaining(
 				donationRequested.getRemaining() - Integer.parseInt(data.get("quantity")));
 
-		// donationMade.getNgoName().add(donationRequested.getNgo().getName());
-		// donationRequested.getDonorName().add(donationMade.getDonor().getName());
-
 		donationRequestedService.save(donationRequested);
 		donationMadeService.save(donationMade);
 
 		DonationDistributed donationDistributed = new DonationDistributed(donationMade, donationRequested,
-				Integer.parseInt(data.get("quantity")));
-		return donationDistributedService.save(donationDistributed);
+				Integer.parseInt(data.get("quantity")), data.get("status"));
+		donationDistributedService.save(donationDistributed);
 
-		// List<DonationMade> updatedDonationMade = donationMadeService.findAll();
-		// return updatedDonationMade;
+		return donationDistributedService.findAll();
 	}
+
+
+	// @PostMapping("/dc")
+	// public DonationDistributed find(@RequestBody Map<String, String> data) {
+	// 	return donationDistributedService.findById(UUID.fromString(data.get("donation_made_id")), UUID.fromString(data.get("donation_requested_id")));
+	// }
 }

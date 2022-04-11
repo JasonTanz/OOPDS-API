@@ -1,9 +1,7 @@
 package oopds.assignment.DC.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;

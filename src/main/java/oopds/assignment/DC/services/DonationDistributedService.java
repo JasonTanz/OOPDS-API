@@ -1,6 +1,7 @@
 package oopds.assignment.DC.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 import oopds.assignment.DC.DAOs.DonationDistributedDAO;
 import oopds.assignment.DC.models.DonationDistributed;
 
+
 @Service
 public class DonationDistributedService {
     private final DonationDistributedDAO donationDistributedDAO;
+
 
     @Autowired
     public DonationDistributedService(DonationDistributedDAO donationDistributedDAO) {
@@ -21,8 +24,12 @@ public class DonationDistributedService {
         return donationDistributedDAO.findAll();
     }
 
-    public List<DonationDistributed> save(DonationDistributed donationDistributed) {
+    public void save(DonationDistributed donationDistributed) {
         donationDistributedDAO.save(donationDistributed);
-        return donationDistributedDAO.findAll();
+    }
+
+    public DonationDistributed findById(UUID id) {
+        // return donationDistributedDAO.find(donationMade, donationRequested);
+        return donationDistributedDAO.findById(id).get();
     }
 }
