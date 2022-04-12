@@ -32,4 +32,9 @@ public class DonationDistributedService {
         // return donationDistributedDAO.find(donationMade, donationRequested);
         return donationDistributedDAO.findById(id).get();
     }
+
+    // Don't know if you'll use this or not
+    public List<DonationDistributed> findByStatus(String status){
+        return donationDistributedDAO.findByStatus(status);
+    }
 }

@@ -1,6 +1,7 @@
 package oopds.assignment.DC.DAOs;
 
 
+import java.util.List;
 import java.util.UUID;
 import oopds.assignment.DC.models.DonationDistributed;
 
@@ -21,4 +22,6 @@ public interface DonationDistributedDAO extends JpaRepository<DonationDistribute
 	// List<DonationDistributed> findByQuantity(int quantity);
 
 	// List<DonationDistributed> findByRemaining(int remaining);
+
+	List<DonationDistributed> findByStatus(String status);
 }
