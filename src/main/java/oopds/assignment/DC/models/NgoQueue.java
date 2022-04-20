@@ -5,10 +5,14 @@ import java.util.Queue;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,7 +25,8 @@ public class NgoQueue {
 	@Column(name = "id", nullable = false)
 	private UUID id;
 
-    @OneToMany
+    @ManyToMany
+    @JsonIgnoreProperties({"donationRequested", "password"})
     private List<Ngo> ngoList;
 
     private String type;
