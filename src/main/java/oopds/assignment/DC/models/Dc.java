@@ -1,4 +1,3 @@
-
 package oopds.assignment.DC.models;
 
 import java.util.UUID;
@@ -26,7 +25,8 @@ public class Dc {
 	/**
 	 * Constructs a Distribution Center Entity with all null values.
 	 */
-	public Dc() {}
+	public Dc() {
+	}
 
 	/**
 	 * Constructs a Distribution Center Entity with specified values. Id is

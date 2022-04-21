@@ -1,9 +1,7 @@
 package oopds.assignment.DC.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,14 +16,11 @@ public class DonationRequested extends Donation {
 	@JsonIgnoreProperties({ "donationRequested", "password" })
 	private Ngo ngo;
 
-	@Column
-	@ElementCollection(targetClass = String.class)
-	private List<String> donorName;
-
 	/**
 	 * Constructs a Donation Requested Entity with all null values.
 	 */
-	public DonationRequested() {}
+	public DonationRequested() {
+	}
 
 	/**
 	 * Constructs a Donation Requested Entity with specified values. Id is
@@ -41,26 +36,6 @@ public class DonationRequested extends Donation {
 	}
 
 	/**
-	 * Gets and Returns the Donor Name that associates with Donation Requested based on
-	 * parameters given.
-	 *
-	 * @return the Donor Name related to the Donation Requested
-	 */
-	public List<String> getDonorName() {
-		return this.donorName;
-	}
-
-	/**
-	 * Updates and changes the Donor Name associated with Donation Requested based on parameter
-	 * given.
-	 *
-	 * @param donorName The new list of donor name associated with Donation Requested
-	 */
-	public void setDonorName(List<String> donorName) {
-		this.donorName = donorName;
-	}
-
-	/**
 	 * Gets and Returns the Ngo that associates with Donation Requested
 	 *
 	 * @return the Ngo related to this Donation Requested
@@ -70,7 +45,8 @@ public class DonationRequested extends Donation {
 	}
 
 	/**
-	 * Updates and changes the Ngo associated with Donation Requested based on parameter
+	 * Updates and changes the Ngo associated with Donation Requested based on
+	 * parameter
 	 * given.
 	 *
 	 * @param ngo The new Ngo associated with Donation Requested
