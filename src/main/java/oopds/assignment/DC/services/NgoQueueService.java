@@ -1,5 +1,7 @@
 package oopds.assignment.DC.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,14 @@ public class NgoQueueService {
     public NgoQueue addNewQueue(NgoQueue ngoQueue) {
         return ngoQueueDAO.save(ngoQueue);
     }
+
+    
+    public List<NgoQueue> findAll() {
+		return ngoQueueDAO.findAll();
+	}
+
+    public void save(NgoQueue ngoQueue){
+        ngoQueueDAO.save(ngoQueue);
+    }
+
 }

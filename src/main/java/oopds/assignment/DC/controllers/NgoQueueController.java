@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -92,6 +94,48 @@ public class NgoQueueController {
             return new ResponseEntity<DataResponse<NgoQueue>>(dataResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    
+    @GetMapping("/NgoQueue")
+    public ResponseEntity<?> getNgoQueue(){
+        try {
+            // To get the queue ( There's only one, so I did ngoQueueService.findAll().get(0) instead )
+            NgoQueue queue = ngoQueueService.findAll().get(0);
+            // Return the full NgoQueue, together with the type
+            DataResponse<NgoQueue> dataResponse = new DataResponse<>(queue, "Successfully get ngo queue");
+            return new ResponseEntity<DataResponse<NgoQueue>>(dataResponse, HttpStatus.OK);
+
+        } catch (Exception e) {
+            DataResponse<?> dataResponse = new DataResponse<>(e.getMessage());
+            return new ResponseEntity<DataResponse<?>>(dataResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+/* 
+    @PatchMapping("/NgoQueue/update")
+    public ResponseEntity<?> updateNgoQueue(@RequestBody List<Ngo> newNgoList, String newType){
+        try {
+            // Find the ngoQueue (The only one)
+            NgoQueue ngoQueue = ngoQueueService.findAll().get(0);
+            // Set values to new values
+            ngoQueue.setNgoList(newNgoList);
+            ngoQueue.setType(newType);
+            
+            // Save
+            ngoQueueService.save(ngoQueue);
+
+            // Return success msg
+            DataResponse<?> dataResponse = new DataResponse<>("NgoQueue has been successfully updated");
+            return new ResponseEntity<DataResponse<?>>(dataResponse, HttpStatus.OK); 
+
+        } catch (Exception e) {
+            // Catch error
+            DataResponse<?>  dataResponse = new DataResponse<>(e.getMessage());
+            return new ResponseEntity<DataResponse<?>>(dataResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+*/
+
 }
 
 @Service

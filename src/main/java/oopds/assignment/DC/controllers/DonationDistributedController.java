@@ -48,7 +48,6 @@ public class DonationDistributedController {
     // Update Status by getting the necessary ID and Status through parameter
     @PatchMapping("/donation-distributed/{id}")
     public ResponseEntity<DataResponse<?>> updateStatus(@RequestBody @PathVariable("id") UUID id, String newStatus){
-
         try {
             // Get the donation distributed needed using ID
             DonationDistributed donationDistributed = donationDistributedService.findById(id);
