@@ -48,6 +48,13 @@ public class NgoQueueController {
 
             List<String> idList = (List<String>) request.get("queue");
 
+            NgoQueue newNgoQueue = null;
+            if(ngoQueueService.getAllQueues().isEmpty()) {
+                newNgoQueue = new NgoQueue();
+            } else {
+                newNgoQueue = ngoQueueService.getAllQueues().get(0);
+            }
+
             if (request.get("type").toString().equalsIgnoreCase("priority")) {
                 System.out.println("inside");
 
@@ -61,7 +68,9 @@ public class NgoQueueController {
                     ngoList.add(ngoQueue.remove());
                 }
 
-                NgoQueue newNgoQueue = new NgoQueue(ngoList, "priority");
+                // NgoQueue newNgoQueue = new NgoQueue(ngoList, "priority");
+                newNgoQueue.setNgoList(ngoList);
+                newNgoQueue.setType("priority");
 
                 ngoQueueService.addNewQueue(newNgoQueue);
 
@@ -76,7 +85,9 @@ public class NgoQueueController {
                     ngoQueue.add(ngoService.findById(UUID.fromString(id)));
                 }
                 System.out.println(ngoQueue.toString());
-                NgoQueue newNgoQueue = new NgoQueue((List) ngoQueue, "fifo");
+                // NgoQueue newNgoQueue = new NgoQueue((List) ngoQueue, "fifo");
+                newNgoQueue.setNgoList((List)ngoQueue);
+                newNgoQueue.setType("fifo");
                 ngoQueueService.addNewQueue(newNgoQueue);
                 DataResponse<NgoQueue> dataResponse = new DataResponse<>(newNgoQueue,
                         "Sorted and saved ngo queue successful");
