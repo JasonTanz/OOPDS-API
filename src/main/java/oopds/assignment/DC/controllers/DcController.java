@@ -72,7 +72,7 @@ public class DcController {
 		donationMadeService.save(donationMade);
 
 		DonationDistributed donationDistributed = new DonationDistributed(donationMade, donationRequested,
-				Integer.parseInt(data.get("quantity")), data.get("status"));
+				Integer.parseInt(data.get("quantity")), "Reserved");
 		donationDistributedService.save(donationDistributed);
 
 		return donationDistributedService.findAll();

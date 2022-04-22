@@ -19,9 +19,10 @@ import oopds.assignment.DC.models.DonationDistributed;
 import oopds.assignment.DC.models.DonationMade;
 import oopds.assignment.DC.services.DonationDistributedService;
 import oopds.assignment.DC.services.DonationMadeService;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class DonationDistributedController {
     private final DonationDistributedService donationDistributedService;
     private final DonationMadeService donationMadeService;
@@ -37,8 +38,8 @@ public class DonationDistributedController {
         List<DonationDistributed> donationDistributed = donationDistributedService.findAll();
         List<DonationMade> donationMade = donationMadeService.findAllRemaining();
         Map<String, List<?>> data = new HashMap<>();
-        data.put("Donation-distributed", donationDistributed);
-        data.put("Donation-made", donationMade);
+        data.put("Donation_distributed", donationDistributed);
+        data.put("Donation_made", donationMade);
         DataResponse<?> dataResponse = new DataResponse<>(
                 data,
                 "Fetched donation distributed successful");
