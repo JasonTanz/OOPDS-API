@@ -16,6 +16,8 @@ public class DcApplication {
 
 	/**
 	 * The main method
+	 * 
+	 * @param args The arguments of the program
 	 */
 	public static void main(String[] args) {
 		SpringApplication.run(DcApplication.class, args);
@@ -23,6 +25,8 @@ public class DcApplication {
 
 	/**
 	 * The method to initialize the Password Encoder that will encrypt the user's password
+	 * 
+	 * @return The initialized Password Encoder
 	 */
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {

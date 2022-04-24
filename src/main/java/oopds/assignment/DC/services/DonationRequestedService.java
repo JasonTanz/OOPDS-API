@@ -1,5 +1,6 @@
 package oopds.assignment.DC.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import oopds.assignment.DC.DAOs.DonationRequestedDAO;
@@ -16,16 +17,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class DonationRequestedService implements DonationService<DonationRequested> {
 
-
-
-
-
 	private final DonationRequestedDAO donationRequestedDAO;
 
 	/**
-	 *  Constructor for the DonationRequestedService class based on the parameters passed
+	 * Constructor for the DonationRequestedService class based on the parameters
+	 * passed
 	 *
-	 *  @param donationRequestedDAO the Data Access Object of the DonationRequested class
+	 * @param donationRequestedDAO the Data Access Object of the DonationRequested
+	 *                             class
 	 */
 	@Autowired
 	public DonationRequestedService(DonationRequestedDAO donationRequestedDAO) {
@@ -36,7 +35,8 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	 * Gets and Returns the Donation Requested Entity, based on id.
 	 *
 	 * @param id the Id to be searched for
-	 * @return a DonationRequested Object, containing the Donation Requested Entity based on
+	 * @return a DonationRequested Object, containing the Donation Requested Entity
+	 *         based on
 	 *         ID in the database.
 	 */
 	@Override
@@ -56,10 +56,12 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	}
 
 	/**
-	 * Gets and Return Donation Requested Entity based on their Item Name in the Database.
+	 * Gets and Return Donation Requested Entity based on their Item Name in the
+	 * Database.
 	 *
 	 * @param item the item name to be searched for
-	 * @return a List Object storing Donation Requested Entity based on their Item Name in the
+	 * @return a List Object storing Donation Requested Entity based on their Item
+	 *         Name in the
 	 *         database.
 	 */
 	@Override
@@ -68,9 +70,11 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	}
 
 	/**
-	 * Gets and Returns the Donations Requested if there's any Remaining Amount of items left.
+	 * Gets and Returns the Donations Requested if there's any Remaining Amount of
+	 * items left.
 	 *
-	 * @return a List of Donations Requested object based on Remaining Amount of items left.
+	 * @return a List of Donations Requested object based on Remaining Amount of
+	 *         items left.
 	 */
 	@Override
 	public List<DonationRequested> findAllRemaining() {
@@ -78,10 +82,11 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	}
 
 	/**
-	 *  Saves all the data/value into the Donations Requested Entity in the database.
+	 * Saves all the data/value into the Donations Requested Entity in the database.
 	 *
-	 *  @param donationRequested the new donation Requested entity to replace the old entity.
-	 *  @return the saved entity.
+	 * @param donationRequested the new donation Requested entity to replace the old
+	 *                          entity.
+	 * @return the saved entity.
 	 */
 	@Override
 	public DonationRequested save(DonationRequested donationRequested) {
@@ -89,11 +94,12 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	}
 
 	/**
-	 *  Update the remaining items left in donation requested entity with the new amount.
+	 * Update the remaining items left in donation requested entity with the new
+	 * amount.
 	 *
-	 *  @param id the id of the donation requested entity to be updated.
-	 *  @param remaining the new value for the remaining data attribute.
-	 *  @return the newly updated entity.
+	 * @param id        the id of the donation requested entity to be updated.
+	 * @param remaining the new value for the remaining data attribute.
+	 * @return the newly updated entity.
 	 */
 	@Override
 	public DonationRequested updateRemainingById(UUID id, int remaining) {
@@ -106,10 +112,30 @@ public class DonationRequestedService implements DonationService<DonationRequest
 	 * Gets and Returns the Donations Requested associated with the Ngo Id passed.
 	 *
 	 * @param id The Ngo Id associated to be searched for.
-	 * @return a List of Donations Requested object based on Remaining Amount of items left.
+	 * @return a List of Donations Requested object based on Remaining Amount of
+	 *         items left.
 	 */
 	public List<DonationRequested> findAllByNgoId(UUID id) {
 		List<DonationRequested> donationRequested = donationRequestedDAO.findAllByNgoId(id);
 		return donationRequested;
+	}
+
+
+	/**
+	 * Gets and Returns the Donations Requested associated with the Ngo Id passed and The 
+	 * Donation Requested haven't been collected/reserved (Available) .
+	 *
+	 * @param id The Ngo Id associated to be searched for.
+	 * @return a List of Donations Requested object based on the searched value passed
+	 */
+	public List<DonationRequested> findRemainingByNgoId(UUID id) {
+		List<DonationRequested> donationRequestedList = new ArrayList<DonationRequested>();
+		for (DonationRequested dr : this.findAllRemaining()) {
+			if (dr.getNgo().getId().equals(id)) {
+				donationRequestedList.add(dr);
+			}
+		}
+
+		return donationRequestedList;
 	}
 }

@@ -1,12 +1,18 @@
 package oopds.assignment.DC.models;
 
-import java.io.Serializable;
+import java.util.UUID;
+
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+// import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * A Database Entity in a database that stores the details of the transaction
@@ -14,26 +20,46 @@ import javax.persistence.ManyToOne;
  */
 @Entity
 public class DonationDistributed {
-	@EmbeddedId
-	private DonationDistributedId id;
+	@Id
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "id", nullable = false)
+	private UUID id;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "donationMade_id")
+	private DonationMade donationMade;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "donationRequested_id")
+	private DonationRequested donationRequested;
 
 	@Column
 	private int quantity;
 
+	@Column
+	private String status;
+
 	/**
 	 * Constructs a Donation Distributed Entity with all Null values;
 	 */
-	public DonationDistributed() {}
+	public DonationDistributed() {
+	}
 
 	/**
 	 * Constructs a Donation Distributed Entity with specified values.
 	 *
-	 * @param id       The id of Donation Distributed.
+	 * @param donationMade The donation made that will be matched
+	 * @param donationRequested The donation requested that will be matched
 	 * @param quantity The amount of item transacted.
+	 * @param status The status of the transaction.
 	 */
-	public DonationDistributed(DonationDistributedId id, int quantity) {
-		this.id = id;
+	public DonationDistributed(DonationMade donationMade, DonationRequested donationRequested, int quantity,
+			String status) {
+		this.donationMade = donationMade;
+		this.donationRequested = donationRequested;
 		this.quantity = quantity;
+		this.status = status;
 	}
 
 	/**
@@ -41,7 +67,7 @@ public class DonationDistributed {
 	 *
 	 * @return The ID of the Donation Distributed Entity
 	 */
-	public DonationDistributedId getId() {
+	public UUID getId() {
 		return this.id;
 	}
 
@@ -51,7 +77,7 @@ public class DonationDistributed {
 	 *
 	 * @param id The new id for the Donation Distributed Entity
 	 */
-	public void setId(DonationDistributedId id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -78,6 +104,67 @@ public class DonationDistributed {
 	}
 
 	/**
+	 * Gets and Returns the status of item transacted in the Donation Distributed
+	 * Entity.
+	 *
+	 * @return An String value, storing the status of item transacted in the
+	 *         donation Distributed Entity.
+	 */
+	public String getStatus() {
+		return this.status;
+	}
+
+	/**
+	 * Update and changes the status item transacted in the Donation Distributed
+	 * based on parameter given.
+	 *
+	 * @param status The status of item transacted for the Donation
+	 *               Distributed Entity
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * Gets and Returns the donation made object
+	 *
+	 * @return An DonationMade object
+	 */
+	public DonationMade getDonationMade() {
+		return this.donationMade;
+	}
+
+	/**
+	 * Update and changes the donation made in the Donation Distributed
+	 * based on parameter given.
+	 *
+	 * @param donationMade The donation made in the Donation Distributed Entity
+	 */
+	public void setDonationMade(DonationMade donationMade) {
+		this.donationMade = donationMade;
+	}
+
+	/**
+	 * Gets and Returns the donation requested object
+	 *
+	 * @return An DonationRequested object
+	 */
+	public DonationRequested getDonationRequested() {
+		return this.donationRequested;
+	}
+
+	/**
+	 * Update and changes the donation requested in the Donation Distributed
+	 * based on parameter given.
+	 *
+	 * @param donationRequested The donation requested in the Donation Distributed
+	 *                          Entity
+	 */
+	public void setDonationRequested(DonationRequested donationRequested) {
+		this.donationRequested = donationRequested;
+	}
+
+	/**
 	 * Returns a string representation of all values of the Donation Distributed
 	 * class.
 	 *
@@ -86,60 +173,5 @@ public class DonationDistributed {
 	@Override
 	public String toString() {
 		return "Id: " + id + ", Quantity: " + quantity;
-	}
-}
-
-/**
- * A Composite Entity to connect Donation Made and Donation Requested together.
- * This class will be used by Donation Distributed entity
- */
-@Embeddable
-class DonationDistributedId implements Serializable {
-	// @Column(name = "donationMade_id")
-	@ManyToOne
-	@JoinColumn(name = "donationMade_id", referencedColumnName = "id")
-	private DonationMade donationMade;
-
-	// @Column(name = "donationRequested_id")
-	@ManyToOne
-	@JoinColumn(name = "donationRequested_id", referencedColumnName = "id")
-	private DonationRequested donationRequested;
-
-	public DonationDistributedId() {}
-
-	/**
-	 * Gets and Returns the Donation Made transaction (Giver)
-	 *
-	 * @return a Donation Made Transaction
-	 */
-	public DonationMade getDonationMade() {
-		return this.donationMade;
-	}
-
-	/**
-	 * Sets the new Donation Made based on parameter given
-	 *
-	 * @param donationMade The new Donation Made Transaction
-	 */
-	public void setDonationMade(DonationMade donationMade) {
-		this.donationMade = donationMade;
-	}
-
-	/**
-	 * Gets and Returns the Donation Requested Transaction (Receiver)
-	 *
-	 * @return a Donation Requested Transaction
-	 */
-	public DonationRequested getDonationRequested_id() {
-		return this.donationRequested;
-	}
-
-	/**
-	 * Sets the new Donation Requested based on parameter given
-	 *
-	 * @param donationRequested The new Donation Requested Transaction
-	 */
-	public void setDonationRequested_id(DonationRequested donationRequested) {
-		this.donationRequested = donationRequested;
 	}
 }

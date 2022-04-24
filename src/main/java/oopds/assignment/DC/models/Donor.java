@@ -32,6 +32,9 @@ public class Donor {
 	@Column
 	private String email;
 
+	@Column
+	private String phoneNumber;
+
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "donor")
 	@JsonIgnoreProperties("donor")
 	private List<DonationMade> donationMade;
@@ -39,7 +42,8 @@ public class Donor {
 	/**
 	 * Constructs a Donor Entity with all null values.
 	 */
-	public Donor() {}
+	public Donor() {
+	}
 
 	/**
 	 * Constructs a Donor Entity with specified values. Id is automatically
@@ -125,6 +129,25 @@ public class Donor {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	/**
+	 * Gets and Returns the phone number of the Donor.
+	 *
+	 * @return a String value, storing the phone number of the donor.
+	 */
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+
+	/**
+	 * Update and changes the Phone Number of the donor based on parameter given.
+	 *
+	 * @param phoneNumber The new Phone Number of the donor.
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	/**
