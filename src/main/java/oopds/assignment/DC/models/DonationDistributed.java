@@ -49,8 +49,10 @@ public class DonationDistributed {
 	/**
 	 * Constructs a Donation Distributed Entity with specified values.
 	 *
-	 * @param id       The id of Donation Distributed.
+	 * @param donationMade The donation made that will be matched
+	 * @param donationRequested The donation requested that will be matched
 	 * @param quantity The amount of item transacted.
+	 * @param status The status of the transaction.
 	 */
 	public DonationDistributed(DonationMade donationMade, DonationRequested donationRequested, int quantity,
 			String status) {

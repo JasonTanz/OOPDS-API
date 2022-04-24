@@ -33,16 +33,19 @@ oopds.assignment.DC.security
 oopds.assignment.DC.services
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/AuthController.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/DcController.java'
+'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/DonationDistributedController.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/DonationMadeController.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/DonationRequestedController.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/DonorController.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/NgoController.java'
+'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/controllers/NgoQueueController.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/DcDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/DonationDistributedDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/DonationMadeDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/DonationRequestedDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/DonorDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/NgoDAO.java'
+'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DAOs/NgoQueueDAO.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/DcApplication.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/DataResponse.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/Dc.java'
@@ -52,12 +55,15 @@ oopds.assignment.DC.services
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/DonationRequested.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/Donor.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/Ngo.java'
+'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/models/NgoQueue.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/security/WebSecurityConfig.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/DcService.java'
+'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/DonationDistributedService.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/DonationMadeService.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/DonationRequestedService.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/DonationService.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/DonorService.java'
+'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/NgoQueueService.java'
 'E:/GitHub/OOPDS-API/src/main/java/oopds/assignment/DC/services/NgoService.java'
 C:\Users\User\.m2\repository\com\auth0\java-jwt\3.19.0\java-jwt-3.19.0.jar = 1648470403024
 C:\Users\User\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.13.1\jackson-databind-2.13.1.jar = 1646027095816
@@ -123,22 +129,23 @@ C:\Users\User\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\
 C:\Users\User\.m2\repository\org\projectlombok\lombok\1.18.22\lombok-1.18.22.jar = 1646371156370
 C:\Users\User\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\2.3.3\jakarta.xml.bind-api-2.3.3.jar = 1646027097887
 C:\Users\User\.m2\repository\jakarta\activation\jakarta.activation-api\1.2.2\jakarta.activation-api-1.2.2.jar = 1646027097992
-E:\GitHub\OOPDS-API\src\main\java = 1646370493540
-E:\GitHub\OOPDS-API\target\generated-sources\annotations = 1646371162871
-E:\GitHub\OOPDS-API\target\apidocs\allclasses-index.html = 1648485364387
-E:\GitHub\OOPDS-API\target\apidocs\allpackages-index.html = 1648485364390
-E:\GitHub\OOPDS-API\target\apidocs\element-list = 1648485363920
-E:\GitHub\OOPDS-API\target\apidocs\help-doc.html = 1648485364464
-E:\GitHub\OOPDS-API\target\apidocs\index-all.html = 1648485364452
-E:\GitHub\OOPDS-API\target\apidocs\index.html = 1648485364356
-E:\GitHub\OOPDS-API\target\apidocs\jquery-ui.overrides.css = 1648485364547
-E:\GitHub\OOPDS-API\target\apidocs\member-search-index.js = 1648485364399
-E:\GitHub\OOPDS-API\target\apidocs\module-search-index.js = 1648485364393
-E:\GitHub\OOPDS-API\target\apidocs\overview-summary.html = 1648485364456
-E:\GitHub\OOPDS-API\target\apidocs\overview-tree.html = 1648485364349
-E:\GitHub\OOPDS-API\target\apidocs\package-search-index.js = 1648485364395
-E:\GitHub\OOPDS-API\target\apidocs\script.js = 1648485364475
-E:\GitHub\OOPDS-API\target\apidocs\search.js = 1648485364484
-E:\GitHub\OOPDS-API\target\apidocs\stylesheet.css = 1648485364469
-E:\GitHub\OOPDS-API\target\apidocs\tag-search-index.js = 1648485364400
-E:\GitHub\OOPDS-API\target\apidocs\type-search-index.js = 1648485364396
+E:\GitHub\OOPDS-API\src\main\java = 1650514068512
+E:\GitHub\OOPDS-API\target\generated-sources\annotations = 1650514096870
+E:\GitHub\OOPDS-API\target\apidocs\allclasses-index.html = 1650788509626
+E:\GitHub\OOPDS-API\target\apidocs\allpackages-index.html = 1650788509631
+E:\GitHub\OOPDS-API\target\apidocs\element-list = 1650788508948
+E:\GitHub\OOPDS-API\target\apidocs\help-doc.html = 1650788509742
+E:\GitHub\OOPDS-API\target\apidocs\index-all.html = 1650788509724
+E:\GitHub\OOPDS-API\target\apidocs\index.html = 1650788509578
+E:\GitHub\OOPDS-API\target\apidocs\javadoc.bat = 1650788427272
+E:\GitHub\OOPDS-API\target\apidocs\jquery-ui.overrides.css = 1650788509785
+E:\GitHub\OOPDS-API\target\apidocs\member-search-index.js = 1650788509638
+E:\GitHub\OOPDS-API\target\apidocs\module-search-index.js = 1650788509633
+E:\GitHub\OOPDS-API\target\apidocs\overview-summary.html = 1650788509729
+E:\GitHub\OOPDS-API\target\apidocs\overview-tree.html = 1650788509572
+E:\GitHub\OOPDS-API\target\apidocs\package-search-index.js = 1650788509634
+E:\GitHub\OOPDS-API\target\apidocs\script.js = 1650788509752
+E:\GitHub\OOPDS-API\target\apidocs\search.js = 1650788509757
+E:\GitHub\OOPDS-API\target\apidocs\stylesheet.css = 1650788509748
+E:\GitHub\OOPDS-API\target\apidocs\tag-search-index.js = 1650788509639
+E:\GitHub\OOPDS-API\target\apidocs\type-search-index.js = 1650788509635

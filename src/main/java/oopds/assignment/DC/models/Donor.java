@@ -131,10 +131,21 @@ public class Donor {
 		this.email = email;
 	}
 
+
+	/**
+	 * Gets and Returns the phone number of the Donor.
+	 *
+	 * @return a String value, storing the phone number of the donor.
+	 */
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
 
+	/**
+	 * Update and changes the Phone Number of the donor based on parameter given.
+	 *
+	 * @param phoneNumber The new Phone Number of the donor.
+	 */
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
