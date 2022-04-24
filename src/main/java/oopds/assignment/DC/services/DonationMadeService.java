@@ -1,5 +1,6 @@
 package oopds.assignment.DC.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import oopds.assignment.DC.DAOs.DonationMadeDAO;
@@ -108,5 +109,24 @@ public class DonationMadeService implements DonationService<DonationMade> {
 		DonationMade donationMade = this.findById(id);
 		donationMade.setRemaining(remaining);
 		return donationMadeDAO.save(donationMade);
+	}
+
+
+	/**
+	 * Gets and Returns the Donations Made associated with the Donor Id passed and The 
+	 * Donation Made haven't been collected/reserved (Available).
+	 *
+	 * @param id The Donor Id associated to be searched for.
+	 * @return a List of Donations Made object based on the searched value passed
+	 */
+	public List<DonationMade> findRemainingByDonorId(UUID id) {
+		List<DonationMade> donationMadeList = new ArrayList<DonationMade>();
+		for (DonationMade dm: this.findAllRemaining()){
+			if (dm.getDonor().getId().equals(id)) {
+				donationMadeList.add(dm);
+			}
+		}
+
+		return donationMadeList;
 	}
 }

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 /**
  * A Database Entity that stores details of the Donation Made by the Donors.
  */
@@ -15,8 +14,6 @@ public class DonationMade extends Donation {
 	@JoinColumn(name = "donor_id")
 	@JsonIgnoreProperties({ "donationMade", "password" })
 	private Donor donor;
-
-
 
 	/**
 	 * Constructs a Donation Made Entity with all null values.

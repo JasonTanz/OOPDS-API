@@ -86,7 +86,7 @@ public class DonationMadeController {
 	 * @param data The full data representing the database.
 	 * @return The new Donation Made entity with the newly saved data.
 	 */
-	@PostMapping("/make-donation")
+	@PostMapping("/make_donation")
 	public DonationMade addDonationMade(@RequestBody Map<String, String> data) {
 		DonationMade donationMade = new DonationMade();
 		donationMade.setDonor(donorService.findById(UUID.fromString(data.get("donor_id"))));

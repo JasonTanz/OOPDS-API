@@ -37,7 +37,8 @@ public class Ngo {
 	/**
 	 * Constructs a Ngo Entity with all null values.
 	 */
-	public Ngo() {}
+	public Ngo() {
+	}
 
 	/**
 	 * Constructs a Ngo Entity with the specified values. Id is automatically
@@ -172,15 +173,13 @@ public class Ngo {
 	 */
 	@Override
 	public String toString() {
-		return (
-			"Id: " +
-			id +
-			", Name: " +
-			name +
-			", Password: " +
-			password +
-			", Manpower: " +
-			manpower
-		);
+		return ("Id: " +
+				id +
+				", Name: " +
+				name +
+				", Password: " +
+				password +
+				", Manpower: " +
+				manpower);
 	}
 }

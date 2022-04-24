@@ -1,9 +1,11 @@
 package oopds.assignment.DC.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import oopds.assignment.DC.models.DataResponse;
 import oopds.assignment.DC.models.DonationDistributed;
 import oopds.assignment.DC.models.DonationMade;
 import oopds.assignment.DC.models.DonationRequested;
@@ -11,6 +13,8 @@ import oopds.assignment.DC.services.DonationDistributedService;
 import oopds.assignment.DC.services.DonationMadeService;
 import oopds.assignment.DC.services.DonationRequestedService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PatchMapping;
 
@@ -39,6 +43,7 @@ public class DcController {
 	 * 
 	 * @param donationMadeService      The service class for Donations Made.
 	 * @param donationRequestedService The service class for Donations Requested.
+	 * @param donationDistributedService The service class for Donation Distributed.
 	 */
 	@Autowired
 	public DcController(
@@ -57,7 +62,7 @@ public class DcController {
 	 * @return The new Donation Made data, representing the new value.
 	 */
 	@PatchMapping("/dc")
-	public List<DonationDistributed> updateRemaining(@RequestBody Map<String, String> data) {
+	public ResponseEntity<DataResponse<?>> updateRemaining(@RequestBody Map<String, String> data) {
 		DonationMade donationMade = donationMadeService.findById(
 				UUID.fromString(data.get("donation_made_id")));
 		donationMade.setRemaining(
@@ -75,12 +80,16 @@ public class DcController {
 				Integer.parseInt(data.get("quantity")), "Reserved");
 		donationDistributedService.save(donationDistributed);
 
-		return donationDistributedService.findAll();
+		List<DonationDistributed> donationDistributedList = donationDistributedService.findAll();
+		List<DonationMade> donationMadeList = donationMadeService.findAllRemaining();
+		List<DonationRequested> donationRequestedList = donationRequestedService.findAllRemaining();
+		Map<String, List<?>> response = new HashMap<>();
+		response.put("Donation_distributed", donationDistributedList);
+		response.put("Donation_made", donationMadeList);
+		response.put("Donation_requested", donationRequestedList);
+		DataResponse<?> dataResponse = new DataResponse<>(
+				response,
+				"Store donation distributed successful");
+		return new ResponseEntity<DataResponse<?>>(dataResponse, HttpStatus.OK);
 	}
-
-
-	// @PostMapping("/dc")
-	// public DonationDistributed find(@RequestBody Map<String, String> data) {
-	// 	return donationDistributedService.findById(UUID.fromString(data.get("donation_made_id")), UUID.fromString(data.get("donation_requested_id")));
-	// }
 }

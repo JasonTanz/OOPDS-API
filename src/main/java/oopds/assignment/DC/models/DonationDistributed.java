@@ -52,7 +52,8 @@ public class DonationDistributed {
 	 * @param id       The id of Donation Distributed.
 	 * @param quantity The amount of item transacted.
 	 */
-	public DonationDistributed(DonationMade donationMade, DonationRequested donationRequested, int quantity, String status) {
+	public DonationDistributed(DonationMade donationMade, DonationRequested donationRequested, int quantity,
+			String status) {
 		this.donationMade = donationMade;
 		this.donationRequested = donationRequested;
 		this.quantity = quantity;
@@ -100,12 +101,65 @@ public class DonationDistributed {
 		this.quantity = quantity;
 	}
 
+	/**
+	 * Gets and Returns the status of item transacted in the Donation Distributed
+	 * Entity.
+	 *
+	 * @return An String value, storing the status of item transacted in the
+	 *         donation Distributed Entity.
+	 */
 	public String getStatus() {
 		return this.status;
 	}
 
+	/**
+	 * Update and changes the status item transacted in the Donation Distributed
+	 * based on parameter given.
+	 *
+	 * @param status The status of item transacted for the Donation
+	 *               Distributed Entity
+	 */
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	/**
+	 * Gets and Returns the donation made object
+	 *
+	 * @return An DonationMade object
+	 */
+	public DonationMade getDonationMade() {
+		return this.donationMade;
+	}
+
+	/**
+	 * Update and changes the donation made in the Donation Distributed
+	 * based on parameter given.
+	 *
+	 * @param donationMade The donation made in the Donation Distributed Entity
+	 */
+	public void setDonationMade(DonationMade donationMade) {
+		this.donationMade = donationMade;
+	}
+
+	/**
+	 * Gets and Returns the donation requested object
+	 *
+	 * @return An DonationRequested object
+	 */
+	public DonationRequested getDonationRequested() {
+		return this.donationRequested;
+	}
+
+	/**
+	 * Update and changes the donation requested in the Donation Distributed
+	 * based on parameter given.
+	 *
+	 * @param donationRequested The donation requested in the Donation Distributed
+	 *                          Entity
+	 */
+	public void setDonationRequested(DonationRequested donationRequested) {
+		this.donationRequested = donationRequested;
 	}
 
 	/**
@@ -118,24 +172,4 @@ public class DonationDistributed {
 	public String toString() {
 		return "Id: " + id + ", Quantity: " + quantity;
 	}
-
-
-	public DonationMade getDonationMade() {
-		return this.donationMade;
-	}
-
-	public void setDonationMade(DonationMade donationMade) {
-		this.donationMade = donationMade;
-	}
-
-	public DonationRequested getDonationRequested() {
-		return this.donationRequested;
-	}
-
-	public void setDonationRequested(DonationRequested donationRequested) {
-		this.donationRequested = donationRequested;
-	}
-
-
 }
-
