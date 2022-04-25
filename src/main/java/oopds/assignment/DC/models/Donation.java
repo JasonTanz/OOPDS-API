@@ -25,7 +25,8 @@ public class Donation {
 	/**
 	 * Constructs a Donation Entity with all null values.
 	 */
-	public Donation() {}
+	public Donation() {
+	}
 
 	/**
 	 * Constructs a Donation Entity with specified values. Id is automatically
@@ -122,15 +123,13 @@ public class Donation {
 	 */
 	@Override
 	public String toString() {
-		return (
-			"Id: " +
-			id +
-			", Item: " +
-			item +
-			", Quantity: " +
-			quantity +
-			", Remaining: " +
-			remaining
-		);
+		return ("Id: " +
+				id +
+				", Item: " +
+				item +
+				", Quantity: " +
+				quantity +
+				", Remaining: " +
+				remaining);
 	}
 }

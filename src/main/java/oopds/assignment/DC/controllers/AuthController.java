@@ -49,11 +49,10 @@ public class AuthController {
 	 */
 	@Autowired
 	public AuthController(
-		DonorService donorService,
-		NgoService ngoService,
-		DcService dcService,
-		BCryptPasswordEncoder bCryptPasswordEncoder
-	) {
+			DonorService donorService,
+			NgoService ngoService,
+			DcService dcService,
+			BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.donorService = donorService;
 		this.ngoService = ngoService;
 		this.dcService = dcService;
@@ -76,16 +75,16 @@ public class AuthController {
 				donorService.addNewDonor(donor);
 
 				String accessToken = JWT
-					.create()
-					.withClaim("role", "Donor")
-					.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-					.sign(algorithm);
+						.create()
+						.withClaim("role", "Donor")
+						.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+						.sign(algorithm);
 
 				String refreshToken = JWT
-					.create()
-					.withClaim("role", "Donor")
-					.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
-					.sign(algorithm);
+						.create()
+						.withClaim("role", "Donor")
+						.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
+						.sign(algorithm);
 				Map<String, Object> data = new HashMap<>();
 				data.put("accessToken", accessToken);
 				data.put("refreshToken", refreshToken);
@@ -94,15 +93,13 @@ public class AuthController {
 				return new ResponseEntity<>(new DataResponse<>(data), HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(
-					new DataResponse<>("Donor name already exist"),
-					HttpStatus.NOT_FOUND
-				);
+						new DataResponse<>("Donor name already exist"),
+						HttpStatus.NOT_FOUND);
 			}
 		} else {
 			return new ResponseEntity<>(
-				new DataResponse<>("Donor email already exists"),
-				HttpStatus.NOT_FOUND
-			);
+					new DataResponse<>("Donor email already exists"),
+					HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -122,16 +119,16 @@ public class AuthController {
 			if (ngoNameExists == null) {
 				ngoService.addNewNgo(ngo);
 				String accessToken = JWT
-					.create()
-					.withClaim("role", "Ngo")
-					.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-					.sign(algorithm);
+						.create()
+						.withClaim("role", "Ngo")
+						.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+						.sign(algorithm);
 
 				String refreshToken = JWT
-					.create()
-					.withClaim("role", "Ngo")
-					.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
-					.sign(algorithm);
+						.create()
+						.withClaim("role", "Ngo")
+						.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
+						.sign(algorithm);
 				Map<String, Object> data = new HashMap<>();
 				data.put("accessToken", accessToken);
 				data.put("refreshToken", refreshToken);
@@ -140,15 +137,13 @@ public class AuthController {
 				return new ResponseEntity<>(new DataResponse<>(data), HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>(
-					new DataResponse<>("Ngo name already exist"),
-					HttpStatus.NOT_FOUND
-				);
+						new DataResponse<>("Ngo name already exist"),
+						HttpStatus.NOT_FOUND);
 			}
 		} else {
 			return new ResponseEntity<>(
-				new DataResponse<>("Ngo email already exists"),
-				HttpStatus.NOT_FOUND
-			);
+					new DataResponse<>("Ngo email already exists"),
+					HttpStatus.NOT_FOUND);
 		}
 	}
 
@@ -166,21 +161,20 @@ public class AuthController {
 
 			if (donorExist != null) {
 				Boolean passwordMatch = bCryptPasswordEncoder.matches(
-					donor.getPassword(),
-					donorExist.getPassword()
-				);
+						donor.getPassword(),
+						donorExist.getPassword());
 				if (passwordMatch) {
 					String accessToken = JWT
-						.create()
-						.withClaim("role", "Donor")
-						.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-						.sign(algorithm);
+							.create()
+							.withClaim("role", "Donor")
+							.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+							.sign(algorithm);
 
 					String refreshToken = JWT
-						.create()
-						.withClaim("role", "Donor")
-						.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
-						.sign(algorithm);
+							.create()
+							.withClaim("role", "Donor")
+							.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
+							.sign(algorithm);
 					Map<String, Object> data = new HashMap<>();
 					data.put("accessToken", accessToken);
 					data.put("refreshToken", refreshToken);
@@ -189,21 +183,18 @@ public class AuthController {
 					return new ResponseEntity<>(new DataResponse<>(data), HttpStatus.OK);
 				} else {
 					return new ResponseEntity<>(
-						new DataResponse<>("Password not match"),
-						HttpStatus.INTERNAL_SERVER_ERROR
-					);
+							new DataResponse<>("Password not match"),
+							HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			} else {
 				return new ResponseEntity<>(
-					new DataResponse<>("Donor not found"),
-					HttpStatus.NOT_FOUND
-				);
+						new DataResponse<>("Donor not found"),
+						HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(
-				new DataResponse<>("Some errors occured"),
-				HttpStatus.INTERNAL_SERVER_ERROR
-			);
+					new DataResponse<>("Some errors occured"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -221,21 +212,20 @@ public class AuthController {
 
 			if (ngoExist != null) {
 				Boolean passwordMatch = bCryptPasswordEncoder.matches(
-					ngo.getPassword(),
-					ngoExist.getPassword()
-				);
+						ngo.getPassword(),
+						ngoExist.getPassword());
 				if (passwordMatch) {
 					String accessToken = JWT
-						.create()
-						.withClaim("role", "Ngo")
-						.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-						.sign(algorithm);
+							.create()
+							.withClaim("role", "Ngo")
+							.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+							.sign(algorithm);
 
 					String refreshToken = JWT
-						.create()
-						.withClaim("role", "Ngo")
-						.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
-						.sign(algorithm);
+							.create()
+							.withClaim("role", "Ngo")
+							.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
+							.sign(algorithm);
 					Map<String, Object> data = new HashMap<>();
 					data.put("accessToken", accessToken);
 					data.put("refreshToken", refreshToken);
@@ -244,21 +234,18 @@ public class AuthController {
 					return new ResponseEntity<>(new DataResponse<>(data), HttpStatus.OK);
 				} else {
 					return new ResponseEntity<>(
-						new DataResponse<>("Password not match"),
-						HttpStatus.INTERNAL_SERVER_ERROR
-					);
+							new DataResponse<>("Password not match"),
+							HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			} else {
 				return new ResponseEntity<>(
-					new DataResponse<>("Ngo not found"),
-					HttpStatus.NOT_FOUND
-				);
+						new DataResponse<>("Ngo not found"),
+						HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(
-				new DataResponse<>("Some errors occured"),
-				HttpStatus.INTERNAL_SERVER_ERROR
-			);
+					new DataResponse<>("Some errors occured"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -277,16 +264,16 @@ public class AuthController {
 
 			if (dc.getEmail() == "dc@gmail.com" & dc.getPassword() == "dc@gmail.com") {
 				String accessToken = JWT
-					.create()
-					.withClaim("role", "Dc")
-					.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-					.sign(algorithm);
+						.create()
+						.withClaim("role", "Dc")
+						.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+						.sign(algorithm);
 
 				String refreshToken = JWT
-					.create()
-					.withClaim("role", "Dc")
-					.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
-					.sign(algorithm);
+						.create()
+						.withClaim("role", "Dc")
+						.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
+						.sign(algorithm);
 				Map<String, Object> data = new HashMap<>();
 				data.put("accessToken", accessToken);
 				data.put("refreshToken", refreshToken);
@@ -297,21 +284,20 @@ public class AuthController {
 
 			if (dcExists != null) {
 				Boolean passwordMatch = bCryptPasswordEncoder.matches(
-					dc.getPassword(),
-					dcExists.getPassword()
-				);
+						dc.getPassword(),
+						dcExists.getPassword());
 				if (passwordMatch) {
 					String accessToken = JWT
-						.create()
-						.withClaim("role", "Dc")
-						.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-						.sign(algorithm);
+							.create()
+							.withClaim("role", "Dc")
+							.withExpiresAt(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+							.sign(algorithm);
 
 					String refreshToken = JWT
-						.create()
-						.withClaim("role", "Dc")
-						.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
-						.sign(algorithm);
+							.create()
+							.withClaim("role", "Dc")
+							.withExpiresAt(new Date(System.currentTimeMillis() + 3600 * 60 * 1000))
+							.sign(algorithm);
 					Map<String, Object> data = new HashMap<>();
 					data.put("accessToken", accessToken);
 					data.put("refreshToken", refreshToken);
@@ -320,21 +306,18 @@ public class AuthController {
 					return new ResponseEntity<>(new DataResponse<>(data), HttpStatus.OK);
 				} else {
 					return new ResponseEntity<>(
-						new DataResponse<>("Password not match."),
-						HttpStatus.INTERNAL_SERVER_ERROR
-					);
+							new DataResponse<>("Password not match."),
+							HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 			} else {
 				return new ResponseEntity<>(
-					new DataResponse<>("Dc not found"),
-					HttpStatus.NOT_FOUND
-				);
+						new DataResponse<>("Dc not found"),
+						HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
 			return new ResponseEntity<>(
-				new DataResponse<>("Some errors occured"),
-				HttpStatus.INTERNAL_SERVER_ERROR
-			);
+					new DataResponse<>("Some errors occured"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

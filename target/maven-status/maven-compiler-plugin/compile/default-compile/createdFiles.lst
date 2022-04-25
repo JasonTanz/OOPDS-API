@@ -23,7 +23,6 @@ oopds\assignment\DC\services\DonationMadeService.class
 oopds\assignment\DC\models\DataResponse.class
 oopds\assignment\DC\DAOs\NgoDAO.class
 oopds\assignment\DC\DcApplication.class
-oopds\assignment\DC\models\DonationDistributedId.class
 oopds\assignment\DC\controllers\NgoController.class
 oopds\assignment\DC\DAOs\DonorDAO.class
 oopds\assignment\DC\controllers\AuthController.class

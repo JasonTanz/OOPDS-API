@@ -1,7 +1,8 @@
 package oopds.assignment.DC.models;
 
 /**
- * This class is used to store and return a value, together with a message, to the Spring REST APIs.
+ * This class is used to store and return a value, together with a message, to
+ * the Spring REST APIs.
  */
 public class DataResponse<T> {
 	private T data = null;
@@ -10,7 +11,8 @@ public class DataResponse<T> {
 	/**
 	 * Constructs a DataResponse Object with all null value
 	 */
-	public DataResponse() {}
+	public DataResponse() {
+	}
 
 	/**
 	 * Constructs a DataResponse Object for passing data only (No need message)
@@ -22,7 +24,8 @@ public class DataResponse<T> {
 	}
 
 	/**
-	 * Constructs a DataResponse Object for passing a message only (Such as errors, that returns no data values)
+	 * Constructs a DataResponse Object for passing a message only (Such as errors,
+	 * that returns no data values)
 	 *
 	 * @param message The String message to be stored in the object.
 	 */
@@ -33,7 +36,7 @@ public class DataResponse<T> {
 	/**
 	 * Constructs a DataResponse Object with the specified values.
 	 *
-	 * @param data The data to be sent
+	 * @param data    The data to be sent
 	 * @param message The message to be sent to the Front-End
 	 */
 	public DataResponse(T data, String message) {
